@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
     SET_TODOS(state, todos) {
       state.todos = todos;
+    },
+    UPDATE_TODO_STATUS(state, id) {
+      state.todos.find(todo => todo.id === id);
     }
   },
   actions: {
@@ -31,6 +34,15 @@ export default new Vuex.Store({
         .catch(error => {
           this.errorMessage = error.response;
         });
+    },
+    updateStatus({ state, commit }, id) {
+      const todoItem = state.todos.find(todo => todo.id === id);
+      todoItem.status === "todo"
+        ? (todoItem.status = "progress")
+        : (todoItem.status = "done");
+      return TodoService.updateTodo(id, todoItem.status).then(() => {
+        commit("UPDATE_TODO_STATUS", id);
+      });
     }
   },
   getters: {

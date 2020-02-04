@@ -18,5 +18,8 @@ export default {
   },
   postTodo(todo) {
     return apiClient.post("/todos", todo);
+  },
+  updateTodo(id, status) {
+    return apiClient.patch("/todos/" + id, { status });
   }
 };
