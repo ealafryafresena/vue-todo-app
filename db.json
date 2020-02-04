@@ -6,15 +6,15 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
-      "priority": "Low"
+      "priority": 3
     },
     {
       "id": 2,
       "title": "Quis ut nam facilis et officia qui",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
-      "status": "todo",
+      "status": "progress",
       "createdAt": 1580603929,
-      "priority": "Low"
+      "priority": 3
     },
     {
       "id": 3,
@@ -22,15 +22,15 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580553929,
-      "priority": "High"
+      "priority": 1
     },
     {
       "id": 4,
       "title": "Laboriosam mollitia et enim quasi adipisci quia provident illum",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
-      "status": "progress",
+      "status": "todo",
       "createdAt": 1580523929,
-      "priority": "Medium"
+      "priority": 2
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580493929,
-      "priority": "Medium"
+      "priority": 2
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
-      "priority": "High"
+      "priority": 1
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
-      "priority": "Low"
+      "priority": 3
     }
   ]
 }

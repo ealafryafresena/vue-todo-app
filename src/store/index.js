@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    priorities: ["High", "Medium", "Low"],
+    priorities: [1, 2, 3],
     todos: []
   },
   mutations: {

@@ -23,6 +23,7 @@
           <h2>No Tasks in Progress</h2>
         </div>
         <TodoItem
+          v-else
           v-for="todo in inProgressTodos"
           :key="todo.id"
           :todo="todo"
@@ -59,13 +60,19 @@ export default {
   },
   computed: {
     openTodos() {
-      return this.todos.filter(todo => todo.status === "todo");
+      return this.todos
+        .filter(todo => todo.status === "todo")
+        .sort(this.sortTodosByPriority);
     },
     inProgressTodos() {
-      return this.todos.filter(todo => todo.status === "progress");
+      return this.todos
+        .filter(todo => todo.status === "progress")
+        .sort(this.sortTodosByPriority);
     },
     doneTodos() {
-      return this.todos.filter(todo => todo.status === "done");
+      return this.todos
+        .filter(todo => todo.status === "done")
+        .sort(this.sortTodosByPriority);
     },
     ...mapState({ todos: state => state.todos })
   },
@@ -75,6 +82,9 @@ export default {
     },
     updateStatus(id) {
       this.$store.dispatch("updateStatus", id);
+    },
+    sortTodosByPriority(a, b) {
+      return a.priority - b.priority;
     }
   }
 };

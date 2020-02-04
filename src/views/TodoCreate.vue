@@ -28,19 +28,23 @@
       <div class="todo-create-form-el">
         <label>Select a priority (required)</label>
         <select v-model="todo.priority">
-          <option value disabled selected>Select a priority</option>
-          <option v-for="priority in priorities" :key="priority">
-            {{ priority }}
-          </option>
+          <option value="0" disabled selected>Select a priority</option>
+          <option
+            v-for="priority in priorities"
+            :key="priority"
+            :value="priority"
+            >{{ priority | priority }}</option
+          >
         </select>
       </div>
-
       <input type="submit" value="Save" />
     </form>
   </div>
 </template>
 
 <script>
+import priority from "@/filters/priority.js";
+
 export default {
   name: "todo-create",
   components: {},
@@ -81,13 +85,16 @@ export default {
       const id = Math.floor(Math.random() * 10000000);
       return {
         id: id,
-        priority: "",
+        priority: 0,
         title: "",
         description: "",
         createdAt: Date.now(),
         status: "todo"
       };
     }
+  },
+  filters: {
+    priority
   }
 };
 </script>
