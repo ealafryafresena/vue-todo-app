@@ -2,42 +2,21 @@
   <div class="todo-list">
     <h1>Simple Task Manager</h1>
     <div class="todo-list-wrapper">
-      <!--  ToDo: refactor columns -->
-      <div class="todo-list-col">
-        <h2>Todo</h2>
-        <div class="todo-list-item-placeholder" v-if="!openTodos.length">
-          <h2>No Tasks in Todo</h2>
+      <div
+        class="todo-list-col"
+        v-for="todosColumn in todosColumns"
+        :key="todosColumn.columnName"
+      >
+        <h2>{{ todosColumn.columnName }}</h2>
+        <div
+          class="todo-list-item-placeholder"
+          v-if="!todosColumn.columnData.length"
+        >
+          <h2>No Tasks in {{ todosColumn.columnName }}</h2>
         </div>
         <TodoItem
           v-else
-          v-for="todo in openTodos"
-          :key="todo.id"
-          :todo="todo"
-          @showDetails="showDetails(todo.id)"
-          @updateStatus="updateStatus(todo.id)"
-        />
-      </div>
-      <div class="todo-list-col">
-        <h2>In Progress</h2>
-        <div class="todo-list-item-placeholder" v-if="!inProgressTodos.length">
-          <h2>No Tasks in Progress</h2>
-        </div>
-        <TodoItem
-          v-else
-          v-for="todo in inProgressTodos"
-          :key="todo.id"
-          :todo="todo"
-          @showDetails="showDetails(todo.id)"
-          @updateStatus="updateStatus(todo.id)"
-        />
-      </div>
-      <div class="todo-list-col">
-        <h2>Done</h2>
-        <div class="todo-list-item-placeholder" v-if="!doneTodos.length">
-          <h2>No Tasks in Done</h2>
-        </div>
-        <TodoItem
-          v-for="todo in doneTodos"
+          v-for="todo in todosColumn.columnData"
           :key="todo.id"
           :todo="todo"
           @showDetails="showDetails(todo.id)"
@@ -59,6 +38,13 @@ export default {
     this.$store.dispatch("fetchTodos");
   },
   computed: {
+    todosColumns() {
+      return [
+        { columnName: "Todo", columnData: this.openTodos },
+        { columnName: "Progress", columnData: this.inProgressTodos },
+        { columnName: "Done", columnData: this.doneTodos }
+      ];
+    },
     openTodos() {
       return this.todos
         .filter(todo => todo.status === "todo")
