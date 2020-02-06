@@ -21,5 +21,14 @@ export default {
   },
   updateTodo(id, status) {
     return apiClient.patch("/todos/" + id, { status });
+  },
+  editTodo(id, { title, description, priority, updatedAt, status }) {
+    return apiClient.patch("/todos/" + id, {
+      title,
+      description,
+      priority,
+      updatedAt,
+      status
+    });
   }
 };

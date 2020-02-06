@@ -89,6 +89,7 @@ export default {
         title: "",
         description: "",
         createdAt: Date.now(),
+        updatedAt: null,
         status: "todo"
       };
     }

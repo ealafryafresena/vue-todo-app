@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     priorities: [1, 2, 3],
+    statuses: ["todo", "progress", "done"],
     todos: []
   },
   mutations: {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
       state.todos = todos;
     },
     UPDATE_TODO_STATUS(state, id) {
+      state.todos.find(todo => todo.id === id);
+    },
+    EDIT_TODO(state, id) {
       state.todos.find(todo => todo.id === id);
     }
   },
@@ -42,6 +46,12 @@ export default new Vuex.Store({
         : (todoItem.status = "done");
       return TodoService.updateTodo(id, todoItem.status).then(() => {
         commit("UPDATE_TODO_STATUS", id);
+      });
+    },
+    editTodo({ state, commit }, id) {
+      const todoItem = state.todos.find(todo => todo.id === id);
+      return TodoService.editTodo(id, todoItem).then(() => {
+        commit("EDIT_TODO", id);
       });
     }
   },

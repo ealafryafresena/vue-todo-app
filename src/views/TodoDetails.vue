@@ -3,8 +3,9 @@
     <h1>Task Details</h1>
     <div class="todo-detail" :class="{ 'todo-detail-done': todo.done }">
       <p class="todo-detail-date">
-        <span
-          >Created at: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}</span
+        <span>Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}</span>
+        <span v-if="todo.updatedAt"
+          >Updated: {{ todo.updatedAt | moment("ddd, MMM Do YYYY") }}</span
         >
         <span>
           <strong>Priority: {{ todo.priority | priority }}</strong>

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import TodosList from "../views/TodosList.vue";
 import TodoDetails from "../views/TodoDetails.vue";
 import TodoCreate from "../views/TodoCreate.vue";
+import TodoEdit from "../views/TodoEdit.vue";
 import NotFound from "@/views/NotFound.vue";
 
 Vue.use(VueRouter);
@@ -22,6 +23,12 @@ const routes = [
     path: "/todo/:id",
     name: "todo-details",
     component: TodoDetails,
+    props: true
+  },
+  {
+    path: "/todo-edit/:id",
+    name: "todo-edit",
+    component: TodoEdit,
     props: true
   },
   {

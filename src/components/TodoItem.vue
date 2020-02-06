@@ -1,7 +1,10 @@
 <template>
   <div class="todo-item" :class="{ 'todo-item-done': todo.status === 'done' }">
     <p class="todo-item-date">
-      <span>Created at: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}</span>
+      <span>
+        Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
+        <i v-if="todo.updatedAt !== null">(U)</i>
+      </span>
       <span>
         <strong>Priority: {{ todo.priority | priority }}</strong>
       </span>
@@ -16,7 +19,14 @@
       {{ todo.description }}
     </p>
     <div class="todo-item-btn-wrapper">
-      <button class="todo-item-btn" @click="showDetails">Show Details</button>
+      <button class="todo-item-btn" @click="showDetails">Details</button>
+      <button
+        v-if="todo.status !== 'done'"
+        class="todo-item-btn"
+        @click="editTodo"
+      >
+        Edit Todo
+      </button>
       <button
         v-if="todo.status !== 'done'"
         class="todo-item-btn"
@@ -49,6 +59,9 @@ export default {
     },
     updateStatus() {
       this.$emit("updateStatus", this.todo.id);
+    },
+    editTodo() {
+      this.$emit("editTodo", this.todo.id);
     }
   },
   filters: {

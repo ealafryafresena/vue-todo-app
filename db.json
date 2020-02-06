@@ -6,6 +6,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
+      "updatedAt": null,
       "priority": 3
     },
     {
@@ -14,6 +15,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "progress",
       "createdAt": 1580603929,
+      "updatedAt": null,
       "priority": 3
     },
     {
@@ -22,7 +24,8 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580553929,
-      "priority": 1
+      "updatedAt": 1580989381518,
+      "priority": 2
     },
     {
       "id": 4,
@@ -30,6 +33,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580523929,
+      "updatedAt": null,
       "priority": 2
     },
     {
@@ -38,6 +42,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580493929,
+      "updatedAt": null,
       "priority": 2
     },
     {
@@ -46,6 +51,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
+      "updatedAt": null,
       "priority": 1
     },
     {
@@ -54,6 +60,7 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
+      "updatedAt": null,
       "priority": 3
     }
   ]

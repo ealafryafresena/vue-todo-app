@@ -21,6 +21,7 @@
           :todo="todo"
           @showDetails="showDetails(todo.id)"
           @updateStatus="updateStatus(todo.id)"
+          @editTodo="editTodo(todo.id)"
         />
       </div>
     </div>
@@ -68,6 +69,9 @@ export default {
     },
     updateStatus(id) {
       this.$store.dispatch("updateStatus", id);
+    },
+    editTodo(id) {
+      this.$router.push({ name: "todo-edit", params: { id } });
     },
     sortTodosByPriority(a, b) {
       return a.priority - b.priority;
