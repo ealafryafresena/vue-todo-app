@@ -1,45 +1,48 @@
 <template>
   <div class="todo-edit">
     <h1>
-      Edit Todo:
+      Edit Task:
       <i>{{ todo.title }}</i>
     </h1>
-    <form @submit.prevent="editTodo(id)">
-      <div class="todo-edit-form-el">
-        <label>Title</label>
-        <input v-model="todo.title" type="text" @change="updatedValue" />
-      </div>
-      <div class="todo-edit-form-el">
-        <label>Description</label>
-        <textarea v-model="todo.description" @change="updatedValue"></textarea>
-      </div>
-      <div class="todo-edit-form-el">
-        <label>Priority</label>
-        <select v-model="todo.priority" @change="updatedValue">
-          <option
-            v-for="priority in priorities"
-            :key="priority"
-            :value="priority"
-            >{{ priority | priority }}</option
-          >
-        </select>
-      </div>
-      <div class="todo-edit-form-el">
-        <label>Status</label>
-        <select v-model="todo.status" @change="updatedValue">
-          <option v-for="status in statuses" :key="status" :value="status">{{
-            status | capitalizeFirstChar
-          }}</option>
-        </select>
-      </div>
-      <button class="todo-edit-btn-cancel" @click="cancelEdit">Cancel</button>
-      <input
-        type="submit"
-        value="Save"
-        :disabled="disabled"
-        :class="{ 'btn-disabled': disabled }"
-      />
-    </form>
+    <div class="todo-edit-form-el">
+      <label>Title</label>
+      <input v-model="todo.title" type="text" @change="updatedValue" />
+    </div>
+    <div class="todo-edit-form-el">
+      <label>Description</label>
+      <textarea v-model="todo.description" @change="updatedValue"></textarea>
+    </div>
+    <div class="todo-edit-form-el">
+      <label>Priority</label>
+      <select v-model="todo.priority" @change="updatedValue">
+        <option
+          v-for="priority in priorities"
+          :key="priority"
+          :value="priority"
+          >{{ priority | priority }}</option
+        >
+      </select>
+    </div>
+    <div class="todo-edit-form-el">
+      <label>Status</label>
+      <select v-model="todo.status" @change="updatedValue">
+        <option v-for="status in statuses" :key="status" :value="status">
+          {{ status | capitalizeFirstChar }}
+        </option>
+      </select>
+    </div>
+    <button class="todo-edit-btn secondary" @click="cancelEdit">Cancel</button>
+    <button class="todo-edit-btn secondary" @click="openConfirmDialog(todo.id)">
+      Delete Task
+    </button>
+    <button
+      class="todo-edit-btn primary"
+      @click="editTodo(todo.id)"
+      :disabled="disabled"
+      :class="{ 'todo-edit-btn-disabled': disabled }"
+    >
+      Save Changes
+    </button>
   </div>
 </template>
 
@@ -73,6 +76,16 @@ export default {
     },
     updatedValue() {
       this.disabled = false;
+    },
+    openConfirmDialog(id) {
+      let deleteTodo = confirm(
+        `Do you really want to delete todo "${this.todo.title}"?`
+      );
+      deleteTodo === true && this.deleteTodo(id);
+    },
+    deleteTodo(id) {
+      this.$store.dispatch("deleteTodo", id);
+      this.$router.push({ name: "todos-list" });
     }
   },
   filters: {
@@ -88,17 +101,33 @@ export default {
     margin-bottom: 1.5rem;
   }
 
-  &-btn-cancel {
+  &-btn {
     font-size: 1.4rem;
     font-weight: bold;
-    background-color: #42b983;
+    // background-color: #42b983;
     border-radius: 0.5rem;
     border: none;
-    color: white;
+    // color: white;
     padding: 0.5rem 0.8rem;
     text-decoration: none;
     cursor: pointer;
     margin-right: 20px;
+
+    &-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &-btn.primary {
+    background-color: #42b983;
+    color: white;
+  }
+
+  &-btn.secondary {
+    background-color: white;
+    color: #42b983;
+    border: 1px solid #42b983;
   }
 }
 label {
@@ -121,20 +150,5 @@ textarea {
 select {
   display: block;
   font-size: 1.1rem;
-}
-input[type="submit"] {
-  font-size: 1.4rem;
-  font-weight: bold;
-  background-color: #42b983;
-  border-radius: 0.5rem;
-  border: none;
-  color: white;
-  padding: 0.5rem 0.8rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-input[type="submit"].btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 </style>

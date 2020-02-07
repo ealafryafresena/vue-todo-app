@@ -30,5 +30,8 @@ export default {
       updatedAt,
       status
     });
+  },
+  deleteTodo(id) {
+    return apiClient.delete("/todos/" + id);
   }
 };

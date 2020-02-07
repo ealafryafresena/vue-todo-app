@@ -22,6 +22,10 @@ export default new Vuex.Store({
     },
     EDIT_TODO(state, id) {
       state.todos.find(todo => todo.id === id);
+    },
+    DELETE_TODO(state, id) {
+      const index = state.todos.findIndex(todo => todo.id == id);
+      state.todos.splice(index, 1);
     }
   },
   actions: {
@@ -52,6 +56,11 @@ export default new Vuex.Store({
       const todoItem = state.todos.find(todo => todo.id === id);
       return TodoService.editTodo(id, todoItem).then(() => {
         commit("EDIT_TODO", id);
+      });
+    },
+    deleteTodo({ commit }, id) {
+      return TodoService.deleteTodo(id).then(() => {
+        commit("DELETE_TODO", id);
       });
     }
   },
