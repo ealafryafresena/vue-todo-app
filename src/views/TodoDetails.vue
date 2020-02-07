@@ -1,7 +1,10 @@
 <template>
   <div class="todo">
     <h1>Task Details</h1>
-    <div class="todo-detail" :class="{ 'todo-detail-done': todo.done }">
+    <div
+      class="todo-detail"
+      :class="{ 'todo-detail-done': todo.status === 'done' }"
+    >
       <p class="todo-detail-date">
         <span>Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}</span>
         <span v-if="todo.updatedAt"
@@ -11,9 +14,11 @@
           <strong>Priority: {{ todo.priority | priority }}</strong>
         </span>
       </p>
-      <h2 :class="{ 'todo-detail-text-done': todo.done }">{{ todo.title }}</h2>
+      <h2 :class="{ 'todo-detail-text-done': todo.status === 'done' }">
+        {{ todo.title }}
+      </h2>
       <p
-        :class="{ 'todo-detail-text-done': todo.done }"
+        :class="{ 'todo-detail-text-done': todo.status === 'done' }"
         class="todo-detail-description"
       >
         {{ todo.description }}
@@ -44,13 +49,7 @@ export default {
     };
   },
   created() {
-    TodoService.getTodo(this.id)
-      .then(response => {
-        this.todo = response.data;
-      })
-      .catch(error => {
-        this.errorMessage = error.response;
-      });
+    this.todo = this.$store.getters.getTodoById(this.id);
   },
   filters: {
     priority
