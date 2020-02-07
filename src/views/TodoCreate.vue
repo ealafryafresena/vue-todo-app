@@ -37,7 +37,15 @@
           >
         </select>
       </div>
-      <input type="submit" value="Save" />
+      <button class="todo-create-btn-cancel" @click="cancelCreate">
+        Cancel
+      </button>
+      <input
+        type="submit"
+        value="Save"
+        :disabled="saveBtnDisabled"
+        :class="{ 'btn-disabled': saveBtnDisabled }"
+      />
     </form>
   </div>
 </template>
@@ -54,6 +62,11 @@ export default {
       todo: this.createFreshTodoObject(),
       errors: []
     };
+  },
+  computed: {
+    saveBtnDisabled() {
+      return this.todo.title !== "" && this.todo.priority !== 0 ? false : true;
+    }
   },
   methods: {
     createTodo() {
@@ -92,6 +105,9 @@ export default {
         updatedAt: null,
         status: "todo"
       };
+    },
+    cancelCreate() {
+      this.$router.push({ name: "todos-list" });
     }
   },
   filters: {
@@ -107,6 +123,18 @@ export default {
   }
   &-form-el {
     margin-bottom: 1.5rem;
+  }
+  &-btn-cancel {
+    font-size: 1.4rem;
+    font-weight: bold;
+    background-color: #42b983;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 20px;
   }
 }
 label {
@@ -133,5 +161,9 @@ input[type="submit"] {
   padding: 0.5rem 0.8rem;
   text-decoration: none;
   cursor: pointer;
+}
+input[type="submit"].btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
