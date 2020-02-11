@@ -1,30 +1,43 @@
 <template>
-  <div class="todo">
-    <h1>Task Details</h1>
-    <div
-      class="todo-detail"
-      :class="{ 'todo-detail-done': todo.status === 'done' }"
-    >
-      <p class="todo-detail-date">
-        <span>Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}</span>
-        <span v-if="todo.updatedAt"
-          >Updated: {{ todo.updatedAt | moment("ddd, MMM Do YYYY") }}</span
-        >
-        <span>
-          <strong>Priority: {{ todo.priority | priority }}</strong>
-        </span>
-      </p>
-      <h2 :class="{ 'todo-detail-text-done': todo.status === 'done' }">
-        {{ todo.title }}
-      </h2>
-      <p
-        :class="{ 'todo-detail-text-done': todo.status === 'done' }"
-        class="todo-detail-description"
-      >
-        {{ todo.description }}
-      </p>
-    </div>
-  </div>
+  <v-container>
+    <v-row class="mt-8" justify="center">
+      <v-col cols="12" md="6">
+        <h1 class="display-1 mb-8">Task Details</h1>
+        <v-card class="mx-auto mb-2" outlined>
+          <v-card-text>
+            <div class="overline mb-3 d-flex justify-space-between">
+              <div>
+                <div>
+                  Created:
+                  {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
+                </div>
+                <div v-if="todo.updatedAt">
+                  Updated:
+                  {{ todo.updatedAt | moment("ddd, MMM Do YYYY") }}
+                </div>
+              </div>
+              <div>
+                <strong>Priority: {{ todo.priority | priority }}</strong>
+                <br />
+                <strong>Status: {{ todo.status }}</strong>
+              </div>
+            </div>
+            <v-list-item-title
+              class="headline mb-3"
+              style="white-space: normal"
+              >{{ todo.title }}</v-list-item-title
+            >
+            <p class="body-1">{{ todo.description }}</p>
+          </v-card-text>
+        </v-card>
+        <div class="todo-details-actions">
+          <v-btn color="blue" outlined @click="backToList"
+            >Back to Task Board</v-btn
+          >
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -40,16 +53,19 @@ import priority from "@/filters/priority.js";
 
 export default {
   name: "todo-details",
-  components: {},
   props: ["id"],
   data() {
     return {
-      todo: {},
-      errorMessage: ""
+      todo: {}
     };
   },
   created() {
     this.todo = this.$store.getters.getTodoById(this.id);
+  },
+  methods: {
+    backToList() {
+      this.$router.push({ name: "todos-list" });
+    }
   },
   filters: {
     priority
@@ -58,37 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.todo-detail {
-  padding: 10px;
-  background-color: #e5e5e5;
-  width: 500px;
-
-  &-done {
-    opacity: 0.7;
-  }
-
-  &-text-done {
-    text-decoration: line-through;
-  }
-
-  &-date {
-    font-size: 0.8rem;
-    margin: 0.2rem 0;
-    display: flex;
-    justify-content: space-between;
-
-    span {
-      display: block;
-    }
-  }
-
-  h2 {
-    margin: 0.2rem 0;
-  }
-
-  &-description {
-    font-size: 1rem;
-    margin: 0.2rem 0;
-  }
+.todo-details-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

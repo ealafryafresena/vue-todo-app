@@ -1,47 +1,87 @@
 <template>
-  <div class="todo-item" :class="{ 'todo-item-done': todo.status === 'done' }">
-    <p class="todo-item-date">
-      <span>
-        Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
-        <i v-if="todo.updatedAt !== null">(U)</i>
-      </span>
-      <span>
-        <strong>Priority: {{ todo.priority | priority }}</strong>
-      </span>
-    </p>
-    <h2 :class="{ 'todo-item-text-done': todo.status === 'done' }">
-      {{ todo.title }}
-    </h2>
-    <p
-      class="todo-item-description"
-      :class="{ 'todo-item-text-done': todo.status === 'done' }"
-    >
-      {{ todo.description }}
-    </p>
-    <div class="todo-item-btn-wrapper">
-      <button class="todo-item-btn" @click="showDetails">Details</button>
-      <button
-        v-if="todo.status !== 'done'"
-        class="todo-item-btn"
-        @click="editTodo"
-      >
-        Edit Todo
-      </button>
-      <button
-        v-if="todo.status !== 'done'"
-        class="todo-item-btn"
-        @click="updateStatus"
-      >
-        Move to {{ moveToStatus }}
-      </button>
-    </div>
-  </div>
+  <v-card class="mx-auto mb-2" max-width="500" outlined>
+    <v-card-text>
+      <div class="overline mb-2 d-flex justify-space-between">
+        <div>
+          Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
+          <i v-if="todo.updatedAt !== null">(U)</i>
+        </div>
+        <div>
+          <strong>Priority: {{ todo.priority | priority }}</strong>
+        </div>
+      </div>
+      <v-list-item-title class="headline mb-1">
+        {{ todo.title }}
+      </v-list-item-title>
+      <v-list-item-subtitle>
+        <span>{{ todo.description }}</span>
+        <span
+          :class="{
+            opacity: todo.description === ''
+          }"
+          >No Description</span
+        >
+      </v-list-item-subtitle>
+    </v-card-text>
+    <v-card-actions class="d-flex justify-end">
+      <div v-for="button in buttons" :key="button.icon">
+        <TodoItemButton
+          class="ml-1 mr-1"
+          :key="button.icon"
+          v-if="button.isStatus"
+          :color="button.color"
+          :width="button.width"
+          :icon="button.icon"
+          :id="todo.id"
+          :onClick="button.event"
+        />
+      </div>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
+import TodoItemButton from "@/components/TodoItemButton.vue";
 import priority from "@/filters/priority.js";
 
 export default {
+  components: {
+    TodoItemButton
+  },
+  data() {
+    return {
+      buttons: [
+        {
+          color: "blue",
+          width: "52",
+          icon: "mdi-arrow-left",
+          isStatus: this.todo.status !== "todo",
+          event: this.updateStatusBack
+        },
+        {
+          color: "blue",
+          width: "52",
+          icon: "mdi-information-outline",
+          isStatus: true,
+          event: this.showDetails
+        },
+        {
+          color: "blue",
+          width: "52",
+          icon: "mdi-pencil",
+          isStatus: this.todo.status !== "done",
+          event: this.editTodo
+        },
+        {
+          color: "blue",
+          width: "52",
+          icon: "mdi-arrow-right",
+          isStatus: this.todo.status !== "done",
+          event: this.updateStatusNext
+        }
+      ]
+    };
+  },
   props: {
     todo: {
       type: Object,
@@ -57,8 +97,11 @@ export default {
     showDetails() {
       this.$emit("showDetails", this.todo.id);
     },
-    updateStatus() {
-      this.$emit("updateStatus", this.todo.id);
+    updateStatusNext() {
+      this.$emit("updateStatusNext", this.todo.id);
+    },
+    updateStatusBack() {
+      this.$emit("updateStatusBack", this.todo.id);
     },
     editTodo() {
       this.$emit("editTodo", this.todo.id);
@@ -71,68 +114,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.todo-item {
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #e5e5e5;
-
-  &-done {
-    opacity: 0.7;
-  }
-
-  &-text-done {
-    text-decoration: line-through;
-  }
-
-  &-date {
-    font-size: 0.8rem;
-    margin: 0.2rem 0;
-    display: flex;
-    justify-content: space-between;
-
-    span {
-      display: block;
-    }
-  }
-
-  &-description {
-    font-size: 1rem;
-    margin: 0.2rem 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  h2 {
-    margin: 0.2rem 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  a {
-    color: #2c3e50;
-    text-decoration: none;
-  }
-
-  &-btn-wrapper {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &-btn {
-    font-size: 0.9rem;
-    border-radius: 0.2rem;
-    border: none;
-    padding: 0.3rem 0.5rem;
-    text-decoration: none;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #b4b4b4;
-      color: white;
-    }
-  }
+.opacity {
+  opacity: 0;
 }
 </style>

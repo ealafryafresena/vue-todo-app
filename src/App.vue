@@ -1,41 +1,82 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'todos-list' }">Tasks Board</router-link>
-      <router-link :to="{ name: 'todo-create' }">Create Task</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="blue" dark>
+      <v-toolbar-title>
+        <router-link :to="{ name: 'todos-list' }">Task Manager</router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        v-for="link in links"
+        :key="`${link.label}-header-link`"
+        text
+        rounded
+        :to="link.url"
+        >{{ link.label }}</v-btn
+      >
+    </v-app-bar>
+
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+
+    <v-footer class="blue" color="white" padless>
+      <v-row justify="center" no-gutters>
+        <v-btn
+          v-for="link in links"
+          :key="`${link.label}-footer-link`"
+          color="white"
+          text
+          rounded
+          class="my-2"
+          :to="link.url"
+          >{{ link.label }}</v-btn
+        >
+        <v-col class="blue lighten-1 py-4 text-center white--text" cols="12">
+          {{ new Date().getFullYear() }} —
+          <strong>Task Manager</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
+  </v-app>
 </template>
 
+<script>
+export default {
+  name: "App",
+  components: {},
+  data: () => ({
+    links: [
+      { label: "Task Board", url: "/" },
+      { label: "Create Task", url: "/todo/create" },
+      { label: "About", url: "/about" }
+    ]
+  })
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  @media (min-width: 1024px) {
-    width: 1020px;
+.v-toolbar__title {
+  a {
+    color: white !important;
+    font-weight: 600;
+    text-decoration: none;
   }
-  margin: 0 auto;
+
+  a:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
 }
 
-#nav {
-  padding: 2rem 0;
-}
-
-#nav a {
-  margin-right: 1rem;
-  padding: 0.5rem 0.8rem;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5rem;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+h1:after {
+  display: block;
+  clear: both;
+  content: "";
+  position: relative;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 70px;
+  border-bottom: 4px solid #2196f3;
+  padding: 4px 0px;
 }
 </style>

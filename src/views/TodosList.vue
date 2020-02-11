@@ -1,31 +1,45 @@
 <template>
-  <div class="todo-list">
-    <h1>Simple Task Manager</h1>
-    <div class="todo-list-wrapper">
-      <div
-        class="todo-list-col"
+  <v-container>
+    <h1 class="display-1 mt-8 mb-8">Task Manager</h1>
+    <v-row>
+      <v-col
+        cols="12"
+        md="4"
         v-for="todosColumn in todosColumns"
         :key="todosColumn.columnName"
       >
-        <h2>{{ todosColumn.columnName }}</h2>
-        <div
-          class="todo-list-item-placeholder"
-          v-if="!todosColumn.columnData.length"
-        >
-          <h2>No Tasks in {{ todosColumn.columnName }}</h2>
+        <h2 class="headline">
+          {{ todosColumn.columnName }}
+          <span
+            v-if="todosColumn.columnData.length"
+            class="title font-weight-regular"
+            >({{ todosColumn.columnData.length }})</span
+          >
+        </h2>
+        <div v-if="!todosColumn.columnData.length">
+          <v-card class="mx-auto mb-2" max-width="500" outlined>
+            <v-card-text>
+              <v-list-item-title>
+                No Tasks in
+                <strong>{{ todosColumn.columnName }}</strong>
+              </v-list-item-title>
+            </v-card-text>
+          </v-card>
         </div>
         <TodoItem
+          class="mb-4"
           v-else
           v-for="todo in todosColumn.columnData"
           :key="todo.id"
           :todo="todo"
           @showDetails="showDetails(todo.id)"
-          @updateStatus="updateStatus(todo.id)"
+          @updateStatusNext="updateStatusNext(todo.id)"
+          @updateStatusBack="updateStatusBack(todo.id)"
           @editTodo="editTodo(todo.id)"
         />
-      </div>
-    </div>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -67,8 +81,11 @@ export default {
     showDetails(id) {
       this.$router.push({ name: "todo-details", params: { id } });
     },
-    updateStatus(id) {
-      this.$store.dispatch("updateStatus", id);
+    updateStatusNext(id) {
+      this.$store.dispatch("updateStatusNext", id);
+    },
+    updateStatusBack(id) {
+      this.$store.dispatch("updateStatusBack", id);
     },
     editTodo(id) {
       this.$router.push({ name: "todo-edit", params: { id } });
@@ -81,27 +98,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.todo-list {
-  &-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  &-col {
-    margin: 0 10px;
-    width: 320px;
-  }
-
-  &-item-placeholder {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #e5e5e5;
-    width: 300px;
-  }
-
-  h2 {
-    margin: 0;
-  }
+h2 {
+  max-width: 500px;
+  margin: auto;
 }
 </style>

@@ -1,6 +1,6 @@
 # vue-todo-app
 
-This is a simple task manager build with [Vue.js](https://vuejs.org/ "Vue.js"), [Vuex](https://vuex.vuejs.org/ "Vuex") and [axios](https://github.com/axios/axios "axios") as a mock server.
+This is a simple task manager built with [Vue.js](https://vuejs.org/ "Vue.js"), [Vuex](https://vuex.vuejs.org/ "Vuex"), [Vuetify](https://vuetifyjs.com/en// "Vuetify") and [axios](https://github.com/axios/axios "axios"), a promise-based HTTP client.
 
 ## Project setup
 
@@ -11,7 +11,7 @@ npm install
 ### Install JSON server
 
 ```
-npm install -g json-server
+npm install json-server
 ```
 
 ### Run JSON server

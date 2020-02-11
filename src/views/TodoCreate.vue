@@ -1,98 +1,82 @@
 <template>
-  <div class="todo-create">
-    <h1>Create Task</h1>
-
-    <div v-if="errors.length" class="todo-create-error">
-      <strong>Please fill out the required fields:</strong>
-      <ul>
-        <li v-for="error in errors" :key="error">{{ error }}</li>
-      </ul>
-    </div>
-
-    <form @submit.prevent="createTodo">
-      <div class="todo-create-form-el">
-        <label>Title (required)</label>
-        <input
-          v-model="todo.title"
-          type="text"
-          placeholder="Add a task title"
-        />
-      </div>
-      <div class="todo-create-form-el">
-        <label>Description</label>
-        <textarea
-          v-model="todo.description"
-          placeholder="Add a task description"
-        ></textarea>
-      </div>
-      <div class="todo-create-form-el">
-        <label>Select a priority (required)</label>
-        <select v-model="todo.priority">
-          <option value="0" disabled selected>Select a priority</option>
-          <option
-            v-for="priority in priorities"
-            :key="priority"
-            :value="priority"
-            >{{ priority | priority }}</option
-          >
-        </select>
-      </div>
-      <button class="todo-create-btn-cancel" @click="cancelCreate">
-        Cancel
-      </button>
-      <input
-        type="submit"
-        value="Save"
-        :disabled="saveBtnDisabled"
-        :class="{ 'btn-disabled': saveBtnDisabled }"
-      />
-    </form>
-  </div>
+  <v-container>
+    <v-row class="mt-6" justify="center">
+      <v-col cols="12" md="8">
+        <h1 class="display-1 mb-8">Create a Task</h1>
+        <div class="mt-4 mb-8">
+          <v-form v-model="formValidty">
+            <v-text-field
+              label="Add a Task Title *"
+              v-model="todo.title"
+              outlined
+              :rules="titleRules"
+              required
+            ></v-text-field>
+            <v-textarea
+              outlined
+              label="Add a Task Description"
+              v-model="todo.description"
+            ></v-textarea>
+            <v-select
+              :items="selectPriorities"
+              item-text="text"
+              item-value="value"
+              label="Select a Priority *"
+              outlined
+              v-model="todo.priority"
+              :rules="priorityRules"
+              required
+            ></v-select>
+            <div class="todo-create-actions d-flex justify-space-between">
+              <div class="todo-create-info subtitle-1 font-weight-regular">
+                * Required
+              </div>
+              <div>
+                <v-btn color="blue" outlined class="mr-4" @click="cancelCreate"
+                  >Cancel</v-btn
+                >
+                <v-btn color="blue" :disabled="!formValidty" @click="createTodo"
+                  >Create Task</v-btn
+                >
+              </div>
+            </div>
+          </v-form>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import priority from "@/filters/priority.js";
-
 export default {
   name: "todo-create",
-  components: {},
   data() {
     return {
-      priorities: this.$store.state.priorities,
       todo: this.createFreshTodoObject(),
-      errors: []
+      selectPriorities: [
+        { text: "High", value: this.$store.state.priorities[0] },
+        { text: "Medium", value: this.$store.state.priorities[1] },
+        { text: "Low", value: this.$store.state.priorities[2] }
+      ],
+      titleRules: [value => !!value || "Title is required"],
+      priorityRules: [value => !!value || "Select a priority"],
+      formValidty: false
     };
-  },
-  computed: {
-    saveBtnDisabled() {
-      return this.todo.title !== "" && this.todo.priority !== 0 ? false : true;
-    }
   },
   methods: {
     createTodo() {
-      this.errors = [];
-
-      if (this.todo.title && this.todo.priority) {
-        this.$store
-          .dispatch("createTodo", this.todo)
-          .then(() => {
-            this.$router.push({
-              name: "todo-details",
-              params: { id: this.todo.id }
-            });
-            this.todo = this.createFreshTodoObject();
-          })
-          .catch(() => {
-            console.log("There was a problem creating your todo");
+      this.$store
+        .dispatch("createTodo", this.todo)
+        .then(() => {
+          this.$router.push({
+            name: "todos-list",
+            params: { id: this.todo.id }
           });
-      } else {
-        if (!this.todo.title) {
-          this.errors.push("Title");
-        }
-        if (!this.todo.priority) {
-          this.errors.push("Priority");
-        }
-      }
+          this.todo = this.createFreshTodoObject();
+        })
+        .catch(() => {
+          console.log("There was a problem creating your todo");
+        });
     },
     createFreshTodoObject() {
       const id = Math.floor(Math.random() * 10000000);
@@ -109,61 +93,19 @@ export default {
     cancelCreate() {
       this.$router.push({ name: "todos-list" });
     }
-  },
-  filters: {
-    priority
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.todo-create {
-  &-error {
-    color: #ff0000;
-  }
-  &-form-el {
-    margin-bottom: 1.5rem;
-  }
-  &-btn-cancel {
-    font-size: 1.4rem;
-    font-weight: bold;
-    background-color: #42b983;
-    border-radius: 0.5rem;
-    border: none;
+.todo-create-actions {
+  width: 100%;
+
+  .theme--light.v-btn {
     color: white;
-    padding: 0.5rem 0.8rem;
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 20px;
   }
 }
-label {
-  font-weight: bold;
-  font-size: 1.4rem;
-  display: block;
-}
-input,
-textarea {
-  font-size: 1.1rem;
-  padding: 0.4rem;
-}
-select {
-  display: block;
-  font-size: 1.1rem;
-}
-input[type="submit"] {
-  font-size: 1.4rem;
-  font-weight: bold;
-  background-color: #42b983;
-  border-radius: 0.5rem;
-  border: none;
-  color: white;
-  padding: 0.5rem 0.8rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-input[type="submit"].btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.todo-create-info {
+  color: rgba(0, 0, 0, 0.6);
 }
 </style>

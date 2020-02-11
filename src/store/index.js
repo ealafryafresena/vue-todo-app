@@ -17,10 +17,7 @@ export default new Vuex.Store({
     SET_TODOS(state, todos) {
       state.todos = todos;
     },
-    UPDATE_TODO_STATUS(state, id) {
-      state.todos.find(todo => todo.id === id);
-    },
-    EDIT_TODO(state, id) {
+    UPDATE_TODO(state, id) {
       state.todos.find(todo => todo.id === id);
     },
     DELETE_TODO(state, id) {
@@ -43,19 +40,28 @@ export default new Vuex.Store({
           this.errorMessage = error.response;
         });
     },
-    updateStatus({ state, commit }, id) {
+    updateStatusNext({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
       todoItem.status === "todo"
         ? (todoItem.status = "progress")
         : (todoItem.status = "done");
       return TodoService.updateTodo(id, todoItem.status).then(() => {
-        commit("UPDATE_TODO_STATUS", id);
+        commit("UPDATE_TODO", id);
+      });
+    },
+    updateStatusBack({ state, commit }, id) {
+      const todoItem = state.todos.find(todo => todo.id === id);
+      todoItem.status === "done"
+        ? (todoItem.status = "progress")
+        : (todoItem.status = "todo");
+      return TodoService.updateTodo(id, todoItem.status).then(() => {
+        commit("UPDATE_TODO", id);
       });
     },
     editTodo({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
       return TodoService.editTodo(id, todoItem).then(() => {
-        commit("EDIT_TODO", id);
+        commit("UPDATE_TODO", id);
       });
     },
     deleteTodo({ commit }, id) {
