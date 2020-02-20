@@ -15,12 +15,11 @@
       </v-list-item-title>
       <v-list-item-subtitle>
         <span>{{ todo.description }}</span>
-        <span
+        <div
           :class="{
-            opacity: todo.description === ''
+            placeholder: todo.description === ''
           }"
-          >No Description</span
-        >
+        ></div>
       </v-list-item-subtitle>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
@@ -114,7 +113,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.opacity {
-  opacity: 0;
+.placeholder {
+  height: 22px;
 }
 </style>
