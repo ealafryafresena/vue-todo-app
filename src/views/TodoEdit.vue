@@ -49,7 +49,7 @@
               <v-btn
                 color="blue"
                 :disabled="!formValidty"
-                @click="editTodo(todo.id)"
+                @click="submitEditTodo(todo.id)"
                 >Save</v-btn
               >
             </div>
@@ -110,13 +110,13 @@ export default {
   },
   computed: mapGetters(["getTodoById"]),
   methods: {
-    ...mapActions(["deleteTodo"]),
-    editTodo(id) {
+    ...mapActions(["deleteTodo", "editTodo"]),
+    submitEditTodo(id) {
       this.todo.updatedAt = Date.now();
       this.todo.description === null
         ? (this.todo.description = "")
         : this.todo.description;
-      this.$store.dispatch("editTodo", id);
+      this.editTodo(id);
       this.$router.push({ name: "todos-list", params: { id } });
     },
     cancelEdit() {

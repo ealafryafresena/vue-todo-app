@@ -44,11 +44,10 @@ export default new Vuex.Store({
         commit("UPDATE_TODO", id);
       });
     },
-    editTodo({ state, commit }, id) {
+    async editTodo({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
-      return TodoService.editTodo(id, todoItem).then(() => {
-        commit("UPDATE_TODO", id);
-      });
+      await TodoService.editTodo(id, todoItem);
+      commit("UPDATE_TODO", id);
     },
     async deleteTodo({ commit }, id) {
       await TodoService.deleteTodo(id);
