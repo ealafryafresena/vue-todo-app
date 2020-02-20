@@ -44,15 +44,16 @@
 
 <script>
 import TodoItem from "@/components/TodoItem.vue";
-import { mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "todos-list",
   components: { TodoItem },
   created() {
-    this.$store.dispatch("fetchTodos");
+    this.fetchTodos();
   },
   computed: {
+    ...mapGetters(["todos"]),
     todosColumns() {
       return [
         { columnName: "Todo", columnData: this.openTodos },
@@ -74,10 +75,10 @@ export default {
       return this.todos
         .filter(todo => todo.status === "done")
         .sort(this.sortTodosByPriority);
-    },
-    ...mapState({ todos: state => state.todos })
+    }
   },
   methods: {
+    ...mapActions(["fetchTodos"]),
     showDetails(id) {
       this.$router.push({ name: "todo-details", params: { id } });
     },

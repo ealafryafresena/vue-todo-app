@@ -31,14 +31,9 @@ export default new Vuex.Store({
         commit("ADD_TODO", todo);
       });
     },
-    fetchTodos({ commit }) {
-      TodoService.getTodos()
-        .then(response => {
-          commit("SET_TODOS", response.data);
-        })
-        .catch(error => {
-          this.errorMessage = error.response;
-        });
+    async fetchTodos({ commit }) {
+      const response = await TodoService.getTodos();
+      commit("SET_TODOS", response.data);
     },
     updateStatusNext({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
@@ -73,6 +68,7 @@ export default new Vuex.Store({
   getters: {
     getTodoById: state => id => {
       return state.todos.find(todo => todo.id === id);
-    }
+    },
+    todos: state => state.todos
   }
 });
