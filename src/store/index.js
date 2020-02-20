@@ -26,10 +26,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    createTodo({ commit }, todo) {
-      return TodoService.postTodo(todo).then(() => {
-        commit("ADD_TODO", todo);
-      });
+    async createTodo({ commit }, todo) {
+      const response = await TodoService.postTodo(todo);
+      commit("ADD_TODO", response.data);
     },
     async fetchTodos({ commit }) {
       const response = await TodoService.getTodos();

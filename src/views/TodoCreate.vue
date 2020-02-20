@@ -35,7 +35,10 @@
                 <v-btn color="blue" outlined class="mr-4" @click="cancelCreate"
                   >Cancel</v-btn
                 >
-                <v-btn color="blue" :disabled="!formValidty" @click="createTodo"
+                <v-btn
+                  color="blue"
+                  :disabled="!formValidty"
+                  @click="submitCreateTodo"
                   >Create Task</v-btn
                 >
               </div>
@@ -48,6 +51,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "todo-create",
   data() {
@@ -64,19 +69,15 @@ export default {
     };
   },
   methods: {
-    createTodo() {
-      this.$store
-        .dispatch("createTodo", this.todo)
-        .then(() => {
-          this.$router.push({
-            name: "todos-list",
-            params: { id: this.todo.id }
-          });
-          this.todo = this.createFreshTodoObject();
-        })
-        .catch(() => {
-          console.log("There was a problem creating your todo");
-        });
+    ...mapActions(["createTodo"]),
+    async submitCreateTodo() {
+      this.createTodo(this.todo);
+
+      await this.$router.push({
+        name: "todos-list",
+        params: { id: this.todo.id }
+      });
+      this.todo = await this.createFreshTodoObject();
     },
     createFreshTodoObject() {
       const id = Math.floor(Math.random() * 10000000);
