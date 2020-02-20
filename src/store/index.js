@@ -58,10 +58,9 @@ export default new Vuex.Store({
         commit("UPDATE_TODO", id);
       });
     },
-    deleteTodo({ commit }, id) {
-      return TodoService.deleteTodo(id).then(() => {
-        commit("DELETE_TODO", id);
-      });
+    async deleteTodo({ commit }, id) {
+      await TodoService.deleteTodo(id);
+      commit("DELETE_TODO", id);
     }
   },
   getters: {

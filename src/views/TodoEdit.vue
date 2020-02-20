@@ -70,7 +70,9 @@
             >Cancel</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn color="blue" dark @click="deleteTodo(todo.id)">Delete</v-btn>
+          <v-btn color="blue" dark @click="submitDeleteTodo(todo.id)"
+            >Delete</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -78,6 +80,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "todo-edit",
   props: ["id"],
@@ -102,9 +106,11 @@ export default {
     };
   },
   created() {
-    this.todo = this.$store.getters.getTodoById(this.id);
+    this.todo = this.getTodoById(this.id);
   },
+  computed: mapGetters(["getTodoById"]),
   methods: {
+    ...mapActions(["deleteTodo"]),
     editTodo(id) {
       this.todo.updatedAt = Date.now();
       this.todo.description === null
@@ -116,8 +122,8 @@ export default {
     cancelEdit() {
       this.$router.push({ name: "todos-list" });
     },
-    deleteTodo(id) {
-      this.$store.dispatch("deleteTodo", id);
+    submitDeleteTodo(id) {
+      this.deleteTodo(id);
       this.dialog = false;
       this.$router.push({ name: "todos-list" });
     }
