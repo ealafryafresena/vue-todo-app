@@ -11,19 +11,11 @@ export default new Vuex.Store({
     todos: []
   },
   mutations: {
-    ADD_TODO(state, todo) {
-      state.todos.push(todo);
-    },
-    SET_TODOS(state, todos) {
-      state.todos = todos;
-    },
-    UPDATE_TODO(state, id) {
-      state.todos.find(todo => todo.id === id);
-    },
-    DELETE_TODO(state, id) {
-      const index = state.todos.findIndex(todo => todo.id == id);
-      state.todos.splice(index, 1);
-    }
+    ADD_TODO: (state, todo) => state.todos.push(todo),
+    SET_TODOS: (state, todos) => (state.todos = todos),
+    UPDATE_TODO: (state, id) => state.todos.find(todo => todo.id === id),
+    DELETE_TODO: (state, id) =>
+      (state.todos = state.todos.filter(todo => todo.id !== id))
   },
   actions: {
     async createTodo({ commit }, todo) {
