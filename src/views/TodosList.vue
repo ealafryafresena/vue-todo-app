@@ -33,8 +33,8 @@
           :key="todo.id"
           :todo="todo"
           @showDetails="showDetails(todo.id)"
-          @updateStatusNext="updateStatusNext(todo.id)"
-          @updateStatusBack="updateStatusBack(todo.id)"
+          @updateStatusNext="statusNext(todo.id)"
+          @updateStatusBack="statusBack(todo.id)"
           @editTodo="editTodo(todo.id)"
         />
       </v-col>
@@ -78,15 +78,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["fetchTodos"]),
+    ...mapActions(["fetchTodos", "updateStatusBack", "updateStatusNext"]),
     showDetails(id) {
       this.$router.push({ name: "todo-details", params: { id } });
     },
-    updateStatusNext(id) {
-      this.$store.dispatch("updateStatusNext", id);
+    statusNext(id) {
+      this.updateStatusNext(id);
     },
-    updateStatusBack(id) {
-      this.$store.dispatch("updateStatusBack", id);
+    statusBack(id) {
+      this.updateStatusBack(id);
     },
     editTodo(id) {
       this.$router.push({ name: "todo-edit", params: { id } });

@@ -26,23 +26,21 @@ export default new Vuex.Store({
       const response = await TodoService.getTodos();
       commit("SET_TODOS", response.data);
     },
-    updateStatusNext({ state, commit }, id) {
+    async updateStatusNext({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
       todoItem.status === "todo"
         ? (todoItem.status = "progress")
         : (todoItem.status = "done");
-      return TodoService.updateTodo(id, todoItem.status).then(() => {
-        commit("UPDATE_TODO", id);
-      });
+      await TodoService.updateTodo(id, todoItem.status);
+      commit("UPDATE_TODO", id);
     },
-    updateStatusBack({ state, commit }, id) {
+    async updateStatusBack({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
       todoItem.status === "done"
         ? (todoItem.status = "progress")
         : (todoItem.status = "todo");
-      return TodoService.updateTodo(id, todoItem.status).then(() => {
-        commit("UPDATE_TODO", id);
-      });
+      await TodoService.updateTodo(id, todoItem.status);
+      commit("UPDATE_TODO", id);
     },
     async editTodo({ state, commit }, id) {
       const todoItem = state.todos.find(todo => todo.id === id);
