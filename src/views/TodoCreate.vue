@@ -66,7 +66,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["createTodo"]),
+    ...mapActions("todos", ["createTodo"]),
     async submitCreateTodo() {
       this.createTodo(this.todo);
 

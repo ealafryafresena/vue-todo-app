@@ -53,7 +53,7 @@ export default {
     this.fetchTodos();
   },
   computed: {
-    ...mapGetters(["todos"]),
+    ...mapGetters("todos", ["todos"]),
     todosColumns() {
       return [
         { columnName: "Todo", columnData: this.openTodos },
@@ -78,7 +78,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["fetchTodos", "updateStatusBack", "updateStatusNext"]),
+    ...mapActions("todos", [
+      "fetchTodos",
+      "updateStatusBack",
+      "updateStatusNext"
+    ]),
     showDetails(id) {
       this.$router.push({ name: "todo-details", params: { id } });
     },

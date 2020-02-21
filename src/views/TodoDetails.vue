@@ -60,7 +60,7 @@ export default {
       todo: {}
     };
   },
-  computed: mapGetters(["getTodoById"]),
+  computed: mapGetters("todos", ["getTodoById"]),
   created() {
     this.todo = this.getTodoById(this.id);
   },

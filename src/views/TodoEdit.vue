@@ -100,10 +100,10 @@ export default {
     this.todo = this.getTodoById(this.id);
   },
   computed: {
-    ...mapGetters(["getTodoById"])
+    ...mapGetters("todos", ["getTodoById"])
   },
   methods: {
-    ...mapActions(["deleteTodo", "editTodo"]),
+    ...mapActions("todos", ["deleteTodo", "editTodo"]),
     submitEditTodo(id) {
       this.todo.updatedAt = Date.now();
       this.todo.description === null
