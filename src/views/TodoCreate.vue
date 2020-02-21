@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { prioritiesLookUp } from "@/services/LookUpService";
 import { mapActions } from "vuex";
 
 export default {
@@ -58,11 +59,7 @@ export default {
   data() {
     return {
       todo: this.createFreshTodoObject(),
-      selectPriorities: [
-        { text: "High", value: this.$store.state.priorities[0] },
-        { text: "Medium", value: this.$store.state.priorities[1] },
-        { text: "Low", value: this.$store.state.priorities[2] }
-      ],
+      selectPriorities: prioritiesLookUp,
       titleRules: [value => !!value || "Title is required"],
       priorityRules: [value => !!value || "Select a priority"],
       formValidty: false

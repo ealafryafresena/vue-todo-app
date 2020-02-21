@@ -6,8 +6,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    priorities: [1, 2, 3],
-    statuses: ["todo", "progress", "done"],
     todos: []
   },
   mutations: {

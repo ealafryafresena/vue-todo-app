@@ -50,6 +50,7 @@ export default {
 <script>
 import TodoService from "@/services/TodoService";
 import priority from "@/filters/priority.js";
+import { mapGetters } from "vuex";
 
 export default {
   name: "todo-details",
@@ -59,8 +60,9 @@ export default {
       todo: {}
     };
   },
+  computed: mapGetters(["getTodoById"]),
   created() {
-    this.todo = this.$store.getters.getTodoById(this.id);
+    this.todo = this.getTodoById(this.id);
   },
   methods: {
     backToList() {

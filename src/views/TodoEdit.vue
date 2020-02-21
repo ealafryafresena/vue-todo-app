@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import { prioritiesLookUp, statusLookUp } from "@/services/LookUpService";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -88,19 +89,9 @@ export default {
   data() {
     return {
       todo: {},
-      priorities: this.$store.state.priorities,
-      statuses: this.$store.state.statuses,
       dialog: false,
-      selectPriorities: [
-        { text: "High", value: this.$store.state.priorities[0] },
-        { text: "Medium", value: this.$store.state.priorities[1] },
-        { text: "Low", value: this.$store.state.priorities[2] }
-      ],
-      selectStatus: [
-        { text: "Todo", value: "todo" },
-        { text: "Progress", value: "progress" },
-        { text: "Done", value: "done" }
-      ],
+      selectPriorities: prioritiesLookUp,
+      selectStatus: statusLookUp,
       titleRules: [value => !!value || "Title is required"],
       formValidty: false
     };
@@ -108,7 +99,9 @@ export default {
   created() {
     this.todo = this.getTodoById(this.id);
   },
-  computed: mapGetters(["getTodoById"]),
+  computed: {
+    ...mapGetters(["getTodoById"])
+  },
   methods: {
     ...mapActions(["deleteTodo", "editTodo"]),
     submitEditTodo(id) {
