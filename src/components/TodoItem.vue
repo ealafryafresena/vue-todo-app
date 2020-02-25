@@ -14,10 +14,10 @@
         <v-tooltip bottom color="#2196f3">
           <template v-slot:activator="{ on }">
             <div class="user-initials" v-on="on">
-              <strong>{{ todo.name | fullNameInitials }}</strong>
+              <strong>{{ userFullName | fullNameInitials }}</strong>
             </div>
           </template>
-          <span>{{ todo.name }}</span>
+          <span>{{ userFullName }}</span>
         </v-tooltip>
       </div>
       <v-list-item-title class="headline mb-1">{{
@@ -101,6 +101,9 @@ export default {
   computed: {
     moveToStatus() {
       return this.todo.status === "todo" ? "Progress" : "Done";
+    },
+    userFullName() {
+      return `${this.todo.firstName} ${this.todo.lastName}`;
     }
   },
   methods: {

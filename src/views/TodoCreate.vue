@@ -79,10 +79,12 @@ export default {
   computed: {
     ...mapGetters("users", ["users"]),
     selectUser() {
-      const renamedKeys = this.users.map(({ id: value, name: text }) => ({
-        value,
-        text
-      }));
+      const renamedKeys = this.users.map(
+        ({ id: value, firstName: firstName, lastName: lastName }) => ({
+          value,
+          text: `${firstName} ${lastName}`
+        })
+      );
       return renamedKeys;
     }
   },

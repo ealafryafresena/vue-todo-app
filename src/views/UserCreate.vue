@@ -4,12 +4,20 @@
       <v-col cols="12" md="8">
         <h1 class="display-1 mb-8">Create a User</h1>
         <div class="mt-4 mb-8">
-          <v-form>
+          <v-form v-model="formValidty">
             <v-text-field
-              label="Name *"
-              v-model="user.name"
+              label="Firstname *"
+              v-model="user.firstName"
               outlined
-              requireds
+              :rules="firstNameRules"
+              required
+            ></v-text-field>
+            <v-text-field
+              label="Lastname *"
+              v-model="user.lastName"
+              outlined
+              :rules="lastNameRules"
+              required
             ></v-text-field>
             <div class="user-create-actions d-flex justify-space-between">
               <div class="user-create-info subtitle-1 font-weight-regular">
@@ -19,7 +27,10 @@
                 <v-btn color="blue" outlined class="mr-4" @click="cancelCreate"
                   >Cancel</v-btn
                 >
-                <v-btn color="blue" @click="submitCreateUser"
+                <v-btn
+                  color="blue"
+                  :disabled="!formValidty"
+                  @click="submitCreateUser"
                   >Create User</v-btn
                 >
               </div>
@@ -38,7 +49,10 @@ export default {
   name: "create-user",
   data() {
     return {
-      user: this.createFreshUserObject()
+      user: this.createFreshUserObject(),
+      firstNameRules: [value => !!value || "Firstname is required"],
+      lastNameRules: [value => !!value || "Lastname is required"],
+      formValidty: false
     };
   },
   methods: {
@@ -56,7 +70,8 @@ export default {
       const id = Math.floor(Math.random() * 10000000);
       return {
         id: id,
-        name: ""
+        firstName: "",
+        lastName: ""
       };
     },
     cancelCreate() {

@@ -75,26 +75,22 @@
     {
       "id": 1,
       "firstName": "John",
-      "lastName": "Doe",
-      "name": "John Doe"
+      "lastName": "Doe"
     },
     {
       "id": 2,
       "firstName": "Jane",
-      "lastName": "Citizen",
-      "name": "Jane Citizen"
+      "lastName": "Citizen"
     },
     {
       "id": 3,
       "firstName": "Richard",
-      "lastName": "Roe",
-      "name": "Richard Roe"
+      "lastName": "Roe"
     },
     {
       "id": 4,
       "firstName": "Mary",
-      "lastName": "Major",
-      "name": "Mary Major"
+      "lastName": "Major"
     }
   ]
 }

@@ -66,8 +66,9 @@ export default {
     userTodos() {
       this.todos.map(todo => {
         const user = this.users.find(user => user.id === todo.userId);
-        const { name } = user;
-        todo.name = name;
+        const { firstName, lastName } = user;
+        todo.firstName = firstName;
+        todo.lastName = lastName;
       });
       return this.todos;
     },

@@ -111,10 +111,12 @@ export default {
     ...mapGetters("users", ["users"]),
     ...mapGetters("todos", ["getTodoById"]),
     selectUser() {
-      const renamedKeys = this.users.map(({ id: value, name: text }) => ({
-        value,
-        text
-      }));
+      const renamedKeys = this.users.map(
+        ({ id: value, firstName: firstName, lastName: lastName }) => ({
+          value,
+          text: `${firstName} ${lastName}`
+        })
+      );
       return renamedKeys;
     }
   },
