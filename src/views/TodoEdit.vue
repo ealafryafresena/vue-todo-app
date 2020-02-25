@@ -20,10 +20,18 @@
               clearable
             ></v-textarea>
             <v-select
+              :items="selectUser"
+              item-text="text"
+              item-value="value"
+              label="Select a User"
+              outlined
+              v-model="todo.userId"
+            ></v-select>
+            <v-select
               :items="selectPriorities"
               item-text="text"
               item-value="value"
-              label="Select a priority"
+              label="Select a Priority"
               outlined
               v-model="todo.priority"
             ></v-select>
@@ -100,7 +108,15 @@ export default {
     this.todo = this.getTodoById(this.id);
   },
   computed: {
-    ...mapGetters("todos", ["getTodoById"])
+    ...mapGetters("users", ["users"]),
+    ...mapGetters("todos", ["getTodoById"]),
+    selectUser() {
+      const renamedKeys = this.users.map(({ id: value, name: text }) => ({
+        value,
+        text
+      }));
+      return renamedKeys;
+    }
   },
   methods: {
     ...mapActions("todos", ["deleteTodo", "editTodo"]),

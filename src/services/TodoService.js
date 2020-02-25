@@ -22,13 +22,14 @@ export default {
   updateTodo(id, status) {
     return apiClient.patch("/todos/" + id, { status });
   },
-  editTodo(id, { title, description, priority, updatedAt, status }) {
+  editTodo(id, { title, description, priority, updatedAt, status, userId }) {
     return apiClient.patch("/todos/" + id, {
       title,
       description,
       priority,
       updatedAt,
-      status
+      status,
+      userId
     });
   },
   deleteTodo(id) {

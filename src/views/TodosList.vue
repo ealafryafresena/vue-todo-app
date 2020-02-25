@@ -50,9 +50,11 @@ export default {
   name: "todos-list",
   components: { TodoItem },
   created() {
+    this.fetchUsers();
     this.fetchTodos();
   },
   computed: {
+    ...mapGetters("users", ["users"]),
     ...mapGetters("todos", ["todos"]),
     todosColumns() {
       return [
@@ -61,18 +63,26 @@ export default {
         { columnName: "Done", columnData: this.doneTodos }
       ];
     },
+    userTodos() {
+      this.todos.map(todo => {
+        const user = this.users.find(user => user.id === todo.userId);
+        const { name } = user;
+        todo.name = name;
+      });
+      return this.todos;
+    },
     openTodos() {
-      return this.todos
+      return this.userTodos
         .filter(todo => todo.status === "todo")
         .sort(this.sortTodosByPriority);
     },
     inProgressTodos() {
-      return this.todos
+      return this.userTodos
         .filter(todo => todo.status === "progress")
         .sort(this.sortTodosByPriority);
     },
     doneTodos() {
-      return this.todos
+      return this.userTodos
         .filter(todo => todo.status === "done")
         .sort(this.sortTodosByPriority);
     }
@@ -83,6 +93,7 @@ export default {
       "updateStatusBack",
       "updateStatusNext"
     ]),
+    ...mapActions("users", ["fetchUsers"]),
     showDetails(id) {
       this.$router.push({ name: "todo-details", params: { id } });
     },

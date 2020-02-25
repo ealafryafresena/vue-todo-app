@@ -48,6 +48,7 @@ export default {
     links: [
       { label: "Task Board", url: "/" },
       { label: "Create Task", url: "/todo/create" },
+      { label: "Create User", url: "/user/create" },
       { label: "About", url: "/about" }
     ]
   })

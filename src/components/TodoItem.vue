@@ -3,16 +3,26 @@
     <v-card-text>
       <div class="overline mb-2 d-flex justify-space-between">
         <div>
-          Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
-          <i v-if="todo.updatedAt !== null">(U)</i>
+          <div>
+            <strong>Priority: {{ todo.priority | priority }}</strong>
+          </div>
+          <div>
+            Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
+            <i v-if="todo.updatedAt !== null">(U)</i>
+          </div>
         </div>
-        <div>
-          <strong>Priority: {{ todo.priority | priority }}</strong>
-        </div>
+        <v-tooltip bottom color="#2196f3">
+          <template v-slot:activator="{ on }">
+            <div class="user-initials" v-on="on">
+              <strong>{{ todo.name | fullNameInitials }}</strong>
+            </div>
+          </template>
+          <span>{{ todo.name }}</span>
+        </v-tooltip>
       </div>
-      <v-list-item-title class="headline mb-1">
-        {{ todo.title }}
-      </v-list-item-title>
+      <v-list-item-title class="headline mb-1">{{
+        todo.title
+      }}</v-list-item-title>
       <v-list-item-subtitle>
         <span>{{ todo.description }}</span>
         <div
@@ -42,6 +52,7 @@
 <script>
 import TodoItemButton from "@/components/TodoItemButton.vue";
 import priority from "@/filters/priority.js";
+import fullNameInitials from "@/filters/fullNameInitials.js";
 
 export default {
   components: {
@@ -107,13 +118,30 @@ export default {
     }
   },
   filters: {
-    priority
+    priority,
+    fullNameInitials
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.v-card__text {
+  padding: 10px 16px 16px 16px;
+}
 .placeholder {
   height: 22px;
+}
+
+.user-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: rgba(33, 150, 243, 0.9);
+  font-size: 14px;
+  letter-spacing: initial;
+  color: white;
 }
 </style>

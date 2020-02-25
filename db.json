@@ -7,7 +7,8 @@
       "status": "todo",
       "createdAt": 1580603929,
       "updatedAt": null,
-      "priority": 3
+      "priority": 3,
+      "userId": 1
     },
     {
       "id": 2,
@@ -15,8 +16,9 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "progress",
       "createdAt": 1580603929,
-      "updatedAt": null,
-      "priority": 3
+      "updatedAt": 1582624614293,
+      "priority": 3,
+      "userId": 1
     },
     {
       "id": 3,
@@ -25,7 +27,8 @@
       "status": "todo",
       "createdAt": 1580553929,
       "updatedAt": 1580989381518,
-      "priority": 2
+      "priority": 2,
+      "userId": 3
     },
     {
       "id": 4,
@@ -34,7 +37,8 @@
       "status": "todo",
       "createdAt": 1580523929,
       "updatedAt": null,
-      "priority": 2
+      "priority": 2,
+      "userId": 4
     },
     {
       "id": 5,
@@ -43,7 +47,8 @@
       "status": "todo",
       "createdAt": 1580493929,
       "updatedAt": null,
-      "priority": 2
+      "priority": 2,
+      "userId": 1
     },
     {
       "id": 6,
@@ -51,8 +56,9 @@
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
       "createdAt": 1580603929,
-      "updatedAt": null,
-      "priority": 1
+      "updatedAt": 1582624602914,
+      "priority": 1,
+      "userId": 2
     },
     {
       "id": 7,
@@ -61,7 +67,34 @@
       "status": "todo",
       "createdAt": 1580603929,
       "updatedAt": null,
-      "priority": 3
+      "priority": 3,
+      "userId": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "name": "John Doe"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Citizen",
+      "name": "Jane Citizen"
+    },
+    {
+      "id": 3,
+      "firstName": "Richard",
+      "lastName": "Roe",
+      "name": "Richard Roe"
+    },
+    {
+      "id": 4,
+      "firstName": "Mary",
+      "lastName": "Major",
+      "name": "Mary Major"
     }
   ]
 }

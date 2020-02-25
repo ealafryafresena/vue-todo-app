@@ -18,6 +18,16 @@
               v-model="todo.description"
             ></v-textarea>
             <v-select
+              :items="selectUser"
+              item-text="text"
+              item-value="value"
+              label="Select a User *"
+              outlined
+              v-model="todo.userId"
+              :rules="userRules"
+              required
+            ></v-select>
+            <v-select
               :items="selectPriorities"
               item-text="text"
               item-value="value"
@@ -52,7 +62,7 @@
 
 <script>
 import { prioritiesLookUp } from "@/services/LookUpService";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "todo-create",
@@ -61,9 +71,20 @@ export default {
       todo: this.createFreshTodoObject(),
       selectPriorities: prioritiesLookUp,
       titleRules: [value => !!value || "Title is required"],
-      priorityRules: [value => !!value || "Select a priority"],
+      priorityRules: [value => !!value || "Select a Priority"],
+      userRules: [value => !!value || "Select a User"],
       formValidty: false
     };
+  },
+  computed: {
+    ...mapGetters("users", ["users"]),
+    selectUser() {
+      const renamedKeys = this.users.map(({ id: value, name: text }) => ({
+        value,
+        text
+      }));
+      return renamedKeys;
+    }
   },
   methods: {
     ...mapActions("todos", ["createTodo"]),
@@ -85,7 +106,8 @@ export default {
         description: "",
         createdAt: Date.now(),
         updatedAt: null,
-        status: "todo"
+        status: "todo",
+        userId: 0
       };
     },
     cancelCreate() {
