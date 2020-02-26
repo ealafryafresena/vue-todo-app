@@ -1,10 +1,16 @@
 <template>
   <v-container>
     <v-row class="mt-6" justify="center">
+      <v-col cols="12" md="6" sm="12">
+        <h1 class="display-1 mb-8">Users</h1>
+        <UserTable :users="users" />
+      </v-col>
+    </v-row>
+    <v-row class="mt-6" justify="center">
       <v-col cols="12" md="6" sm="8">
         <h1 class="display-1 mb-8">Create User</h1>
         <div class="mt-4 mb-8">
-          <v-form v-model="formValidty">
+          <v-form v-model="formValidty" ref="form">
             <v-text-field
               label="Firstname *"
               v-model="user.firstName"
@@ -43,10 +49,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import UserTable from "@/components/UserTable.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   name: "create-user",
+  components: { UserTable },
   data() {
     return {
       user: this.createFreshUserObject(),
@@ -65,16 +73,20 @@ export default {
       formValidty: false
     };
   },
+  created() {
+    this.fetchUsers();
+  },
+  computed: {
+    ...mapGetters("users", ["users"]),
+    ...mapState("users", ["users"])
+  },
   methods: {
     ...mapActions("users", ["createUser"]),
+    ...mapActions("users", ["fetchUsers"]),
     async submitCreateUser() {
       this.createUser(this.user);
-
-      await this.$router.push({
-        name: "todos-list",
-        params: { id: this.user.id }
-      });
       this.user = await this.createFreshUserObject();
+      this.$refs.form.reset();
     },
     createFreshUserObject() {
       const id = Math.floor(Math.random() * 10000000);
