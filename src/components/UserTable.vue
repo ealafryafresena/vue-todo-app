@@ -5,6 +5,9 @@
         <tr>
           <th class="text-left">Firstname</th>
           <th class="text-left">Lastname</th>
+          <th class="text-left">Tasks in Todo</th>
+          <th class="text-left">Tasks in Progress</th>
+          <th class="text-left">Tasks in Done</th>
           <th class="text-left">Avatar</th>
         </tr>
       </thead>
@@ -12,6 +15,9 @@
         <tr v-for="user in users" :key="user.id">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
+          <td>{{ user.todosCount.statusTodo }}</td>
+          <td>{{ user.todosCount.statusProgress }}</td>
+          <td>{{ user.todosCount.statusDone }}</td>
           <td>
             <UserInitials
               :user="{ firstName: user.firstName, lastName: user.lastName }"

@@ -8,7 +8,7 @@
             >Create User</v-btn
           >
         </div>
-        <UserTable :users="users" />
+        <UserTable :users="userTableData" />
       </v-col>
     </v-row>
     <v-row class="mt-6" justify="center">
@@ -41,13 +41,33 @@ export default {
   },
   created() {
     this.fetchUsers();
+    this.fetchTodos();
   },
   computed: {
     ...mapGetters("users", ["users"]),
-    ...mapState("users", ["users"])
+    ...mapGetters("todos", ["todos"]),
+    ...mapState("users", ["users"]),
+    userTableData() {
+      return this.users.map(user => {
+        const todosByUser = this.todos.filter(todo => todo.userId === user.id);
+
+        const statusTodo = todosByUser.filter(todo => todo.status === "todo");
+        const statusProgress = todosByUser.filter(
+          todo => todo.status === "progress"
+        );
+        const statusDone = todosByUser.filter(todo => todo.status === "done");
+
+        user.todosCount = {};
+        user.todosCount.statusTodo = statusTodo.length;
+        user.todosCount.statusProgress = statusProgress.length;
+        user.todosCount.statusDone = statusDone.length;
+        return user;
+      });
+    }
   },
   methods: {
     ...mapActions("users", ["fetchUsers"]),
+    ...mapActions("todos", ["fetchTodos"]),
     closeDialog() {
       this.dialog = false;
     }
