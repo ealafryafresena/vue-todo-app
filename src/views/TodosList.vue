@@ -1,6 +1,15 @@
 <template>
   <v-container>
-    <h1 class="display-1 mt-8 mb-8">Task Manager</h1>
+    <div class="user-bar mt-3 d-flex justify-end">
+      <UserInitials
+        class="ml-2"
+        v-for="user in users"
+        :key="user.id"
+        :user="user"
+        :initials-style="initialsStyle"
+      />
+    </div>
+    <h1 class="display-1 mt-2 mb-8">Task Manager</h1>
     <v-row>
       <v-col
         cols="12"
@@ -44,11 +53,21 @@
 
 <script>
 import TodoItem from "@/components/TodoItem.vue";
+import UserInitials from "@/components/UserInitials.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "todos-list",
-  components: { TodoItem },
+  components: { TodoItem, UserInitials },
+  data() {
+    return {
+      initialsStyle: {
+        width: "36px",
+        height: "36px",
+        fontSize: "16px"
+      }
+    };
+  },
   created() {
     this.fetchUsers();
     this.fetchTodos();

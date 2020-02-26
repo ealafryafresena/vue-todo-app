@@ -11,18 +11,11 @@
             <i v-if="todo.updatedAt !== null">(U)</i>
           </div>
         </div>
-        <v-tooltip bottom color="#2196f3">
-          <template v-slot:activator="{ on }">
-            <div class="user-initials" v-on="on">
-              <strong>{{ userFullName | fullNameInitials }}</strong>
-            </div>
-          </template>
-          <span>{{ userFullName }}</span>
-        </v-tooltip>
+        <UserInitials :user="userName" :initials-style="initialsStyle" />
       </div>
-      <v-list-item-title class="headline mb-1">{{
-        todo.title
-      }}</v-list-item-title>
+      <v-list-item-title class="headline mb-1">
+        {{ todo.title }}
+      </v-list-item-title>
       <v-list-item-subtitle>
         <span>{{ todo.description }}</span>
         <div
@@ -50,16 +43,23 @@
 </template>
 
 <script>
+import UserInitials from "@/components/UserInitials.vue";
 import TodoItemButton from "@/components/TodoItemButton.vue";
 import priority from "@/filters/priority.js";
 import fullNameInitials from "@/filters/fullNameInitials.js";
 
 export default {
   components: {
+    UserInitials,
     TodoItemButton
   },
   data() {
     return {
+      initialsStyle: {
+        width: "30px",
+        height: "30px",
+        fontSize: "14px"
+      },
       buttons: [
         {
           color: "blue",
@@ -102,8 +102,8 @@ export default {
     moveToStatus() {
       return this.todo.status === "todo" ? "Progress" : "Done";
     },
-    userFullName() {
-      return `${this.todo.firstName} ${this.todo.lastName}`;
+    userName() {
+      return { firstName: this.todo.firstName, lastName: this.todo.lastName };
     }
   },
   methods: {
@@ -133,18 +133,5 @@ export default {
 }
 .placeholder {
   height: 22px;
-}
-
-.user-initials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  background-color: rgba(33, 150, 243, 0.9);
-  font-size: 14px;
-  letter-spacing: initial;
-  color: white;
 }
 </style>

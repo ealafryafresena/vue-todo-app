@@ -10,6 +10,7 @@
               v-model="todo.title"
               outlined
               :rules="titleRules"
+              :counter="100"
               clearable
               required
             ></v-text-field>
@@ -17,13 +18,15 @@
               outlined
               label="Description"
               v-model="todo.description"
+              :rules="descriptionRules"
+              :counter="500"
               clearable
             ></v-textarea>
             <v-select
               :items="selectUser"
               item-text="text"
               item-value="value"
-              label="Select a User"
+              label="Select User"
               outlined
               v-model="todo.userId"
             ></v-select>
@@ -31,7 +34,7 @@
               :items="selectPriorities"
               item-text="text"
               item-value="value"
-              label="Select a Priority"
+              label="Select Priority"
               outlined
               v-model="todo.priority"
             ></v-select>
@@ -100,7 +103,16 @@ export default {
       dialog: false,
       selectPriorities: prioritiesLookUp,
       selectStatus: statusLookUp,
-      titleRules: [value => !!value || "Title is required"],
+      titleRules: [
+        value => !!value || "Title is required",
+        value =>
+          (value && value.length <= 100) ||
+          "Title must be less than 101 characters"
+      ],
+      descriptionRules: [
+        value =>
+          value.length <= 500 || "Description must be less than 501 characters"
+      ],
       formValidty: false
     };
   },

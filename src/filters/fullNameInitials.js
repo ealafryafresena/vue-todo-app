@@ -1,6 +1,8 @@
 export default value => {
-  return value
-    .split(" ")
-    .map(n => n[0])
-    .join("");
+  const valueSplitted = value.split(" ");
+  const firstLastWord = [
+    valueSplitted[0],
+    valueSplitted[valueSplitted.length - 1]
+  ];
+  return firstLastWord.map(n => n[0]).join("");
 };

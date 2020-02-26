@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row class="mt-6" justify="center">
-      <v-col cols="12" md="8">
-        <h1 class="display-1 mb-8">Create a User</h1>
+      <v-col cols="12" md="6" sm="8">
+        <h1 class="display-1 mb-8">Create User</h1>
         <div class="mt-4 mb-8">
           <v-form v-model="formValidty">
             <v-text-field
@@ -50,8 +50,18 @@ export default {
   data() {
     return {
       user: this.createFreshUserObject(),
-      firstNameRules: [value => !!value || "Firstname is required"],
-      lastNameRules: [value => !!value || "Lastname is required"],
+      firstNameRules: [
+        value => !!value || "Firstname is required",
+        value =>
+          (value && value.length <= 15) ||
+          "Firstname must be less than 15 characters"
+      ],
+      lastNameRules: [
+        value => !!value || "Lastname is required",
+        value =>
+          (value && value.length <= 15) ||
+          "Lastname must be less than 15 characters"
+      ],
       formValidty: false
     };
   },

@@ -21,6 +21,7 @@
                 <br />
                 <strong>Status: {{ todo.status }}</strong>
               </div>
+              <UserInitials :user="userName" :initials-style="initialsStyle" />
             </div>
             <v-list-item-title
               class="headline mb-3"
@@ -48,19 +49,33 @@ export default {
 </script>
 
 <script>
+import UserInitials from "@/components/UserInitials.vue";
 import TodoService from "@/services/TodoService";
 import priority from "@/filters/priority.js";
 import { mapGetters } from "vuex";
 
 export default {
   name: "todo-details",
+  components: {
+    UserInitials
+  },
   props: ["id"],
   data() {
     return {
-      todo: {}
+      todo: {},
+      initialsStyle: {
+        width: "34px",
+        height: "34px",
+        fontSize: "16px"
+      }
     };
   },
-  computed: mapGetters("todos", ["getTodoById"]),
+  computed: {
+    ...mapGetters("todos", ["getTodoById"]),
+    userName() {
+      return { firstName: this.todo.firstName, lastName: this.todo.lastName };
+    }
+  },
   created() {
     this.todo = this.getTodoById(this.id);
   },

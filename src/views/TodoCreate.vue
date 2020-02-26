@@ -2,26 +2,29 @@
   <v-container>
     <v-row class="mt-6" justify="center">
       <v-col cols="12" md="8">
-        <h1 class="display-1 mb-8">Create a Task</h1>
+        <h1 class="display-1 mb-8">Create Task</h1>
         <div class="mt-4 mb-8">
           <v-form v-model="formValidty">
             <v-text-field
-              label="Add a Task Title *"
+              label="Add Task Title *"
               v-model="todo.title"
+              :counter="100"
               outlined
               :rules="titleRules"
               required
             ></v-text-field>
             <v-textarea
+              :counter="500"
+              :rules="descriptionRules"
               outlined
-              label="Add a Task Description"
+              label="Add Task Description"
               v-model="todo.description"
             ></v-textarea>
             <v-select
               :items="selectUser"
               item-text="text"
               item-value="value"
-              label="Select a User *"
+              label="Select User *"
               outlined
               v-model="todo.userId"
               :rules="userRules"
@@ -31,7 +34,7 @@
               :items="selectPriorities"
               item-text="text"
               item-value="value"
-              label="Select a Priority *"
+              label="Select Priority *"
               outlined
               v-model="todo.priority"
               :rules="priorityRules"
@@ -70,9 +73,18 @@ export default {
     return {
       todo: this.createFreshTodoObject(),
       selectPriorities: prioritiesLookUp,
-      titleRules: [value => !!value || "Title is required"],
-      priorityRules: [value => !!value || "Select a Priority"],
-      userRules: [value => !!value || "Select a User"],
+      titleRules: [
+        value => !!value || "Title is required",
+        value =>
+          (value && value.length <= 100) ||
+          "Title must be less than 101 characters"
+      ],
+      descriptionRules: [
+        value =>
+          value.length <= 500 || "Description must be less than 501 characters"
+      ],
+      priorityRules: [value => !!value || "Select Priority"],
+      userRules: [value => !!value || "Select User"],
       formValidty: false
     };
   },

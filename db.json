@@ -7,7 +7,7 @@
       "status": "todo",
       "createdAt": 1580603929,
       "updatedAt": null,
-      "priority": 3,
+      "priority": 1,
       "userId": 1
     },
     {
@@ -18,7 +18,7 @@
       "createdAt": 1580603929,
       "updatedAt": 1582624614293,
       "priority": 3,
-      "userId": 1
+      "userId": 2
     },
     {
       "id": 3,
@@ -32,16 +32,6 @@
     },
     {
       "id": 4,
-      "title": "Laboriosam mollitia et enim quasi adipisci quia provident illum",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
-      "status": "todo",
-      "createdAt": 1580523929,
-      "updatedAt": null,
-      "priority": 2,
-      "userId": 4
-    },
-    {
-      "id": 5,
       "title": "Qui ullam ratione quibusdam voluptatem quia omnis",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
@@ -51,7 +41,7 @@
       "userId": 1
     },
     {
-      "id": 6,
+      "id": 5,
       "title": "Laboriosam mollitia et enim quasi adipisci quia provident illum",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
@@ -61,7 +51,7 @@
       "userId": 2
     },
     {
-      "id": 7,
+      "id": 6,
       "title": "Quis ut nam facilis et officia qui",
       "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
       "status": "todo",
@@ -86,11 +76,6 @@
       "id": 3,
       "firstName": "Richard",
       "lastName": "Roe"
-    },
-    {
-      "id": 4,
-      "firstName": "Mary",
-      "lastName": "Major"
     }
   ]
 }
