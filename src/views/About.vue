@@ -2,20 +2,60 @@
   <v-container>
     <v-row class="mt-8 mb-8" justify="center">
       <v-col cols="12">
-        <!-- ToDo: add content -->
         <h1 class="display-1">About the Task Manager</h1>
         <div class="d-flex flex-wrap justify-space-around mt-12">
-          <v-card
-            v-for="aboutCard in aboutCards"
-            :key="aboutCard.title"
-            class="mb-12"
-            outlined
-            width="300px"
-          >
-            <v-card-title class="headline">{{ aboutCard.title }}</v-card-title>
-
-            <v-card-subtitle>{{ aboutCard.text }}</v-card-subtitle>
-          </v-card>
+          <div class="about-item">
+            <h2 class="headline mb-4">Create Tasks</h2>
+            <ul>
+              <li>Add a title</li>
+              <li>Add a description</li>
+              <li>Assign a user</li>
+              <li>Assign a priority</li>
+            </ul>
+          </div>
+          <div class="about-item">
+            <h2 class="headline mb-4">Create Users</h2>
+            <ul>
+              <li>Add firstname</li>
+              <li>Add lastname</li>
+            </ul>
+          </div>
+          <div class="about-item">
+            <h2 class="headline mb-4">Workflow</h2>
+            <ul>
+              <li>Move task to corresponding column</li>
+              <li>next/prev</li>
+            </ul>
+          </div>
+          <div class="about-item">
+            <h2 class="headline mb-4">Edit Tasks</h2>
+            <ul>
+              <li>Edit title</li>
+              <li>Edit description</li>
+              <li>Change user</li>
+              <li>Change priority</li>
+            </ul>
+          </div>
+          <div class="about-item">
+            <h2 class="headline mb-4">User Overview</h2>
+            <ul>
+              <li>User name</li>
+              <li>Amount of tasks in Todo</li>
+              <li>Amount of tasks in Progress</li>
+              <li>Amount of tasks in Done</li>
+            </ul>
+          </div>
+          <div class="about-item">
+            <h2 class="headline mb-4">Task Details</h2>
+            <ul>
+              <li>Created at</li>
+              <li>Last updated at</li>
+              <li>Assigned user</li>
+              <li>Status</li>
+              <li>Title</li>
+              <li>Description</li>
+            </ul>
+          </div>
         </div>
       </v-col>
     </v-row>
@@ -24,56 +64,26 @@
 
 <script>
 export default {
-  name: "todo-create",
-  data() {
-    return {
-      aboutCards: [
-        {
-          title: "First Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        },
-        {
-          title: "Second Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        },
-        {
-          title: "Third Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        },
-        {
-          title: "Fourth Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        },
-        {
-          title: "Fith Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        },
-        {
-          title: "Sixt Card",
-          text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.`
-        }
-      ]
-    };
-  }
+  name: "todo-create"
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.about-item {
+  width: 340px;
+  padding: 20px 25px 25px;
+  margin-bottom: 50px;
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+
+  h2 {
+    border-bottom: 2px solid #2196f3;
+  }
+
+  ul {
+    list-style: circle;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+</style>
