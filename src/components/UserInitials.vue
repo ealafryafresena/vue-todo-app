@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tooltip bottom color="#2196f3">
+    <v-tooltip bottom :color="user.avatarColor">
       <template v-slot:activator="{ on }">
         <div
           class="user-initials d-flex justify-center align-center"
@@ -8,7 +8,8 @@
           :style="{
             width: initialsStyle.width,
             height: initialsStyle.height,
-            fontSize: initialsStyle.fontSize
+            fontSize: initialsStyle.fontSize,
+            backgroundColor: user.avatarColor
           }"
         >
           <strong>{{ userFullName | fullNameInitials }}</strong>
@@ -48,7 +49,6 @@ export default {
 <style lang="scss" scoped>
 .user-initials {
   border-radius: 100%;
-  background-color: rgba(33, 150, 243, 0.9);
   letter-spacing: initial;
   color: white;
 }

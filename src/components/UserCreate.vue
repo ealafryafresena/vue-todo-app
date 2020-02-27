@@ -59,10 +59,16 @@ export default {
       formValidty: false
     };
   },
+  props: {
+    avatarColors: Array
+  },
   methods: {
     ...mapActions("users", ["createUser"]),
     async submitCreateUser() {
       this.createUser(this.user);
+      this.user.avatarColor = this.avatarColors[
+        Math.floor(Math.random() * this.avatarColors.length)
+      ];
       this.user = await this.createFreshUserObject();
       this.closeDialog();
     },
@@ -71,7 +77,8 @@ export default {
       return {
         id: id,
         firstName: "",
-        lastName: ""
+        lastName: "",
+        avatarColor: ""
       };
     },
     closeDialog() {

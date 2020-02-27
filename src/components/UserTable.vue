@@ -20,7 +20,11 @@
           <td>{{ user.todosCount.statusDone }}</td>
           <td>
             <UserInitials
-              :user="{ firstName: user.firstName, lastName: user.lastName }"
+              :user="{
+                firstName: user.firstName,
+                lastName: user.lastName,
+                avatarColor: user.avatarColor
+              }"
               :initials-style="initialsStyle"
             />
           </td>
@@ -42,7 +46,7 @@ export default {
       initialsStyle: {
         width: "26px",
         height: "26px",
-        fontSize: "14px"
+        fontSize: "12px"
       }
     };
   },

@@ -8,7 +8,7 @@
       "createdAt": 1580603929,
       "updatedAt": null,
       "priority": 1,
-      "userId": 1
+      "userId": 9220314
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "createdAt": 1580603929,
       "updatedAt": 1582624614293,
       "priority": 3,
-      "userId": 2
+      "userId": 9220314
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "createdAt": 1580553929,
       "updatedAt": 1580989381518,
       "priority": 2,
-      "userId": 3
+      "userId": 8302314
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "createdAt": 1580493929,
       "updatedAt": null,
       "priority": 2,
-      "userId": 1
+      "userId": 8302314
     },
     {
       "id": 5,
@@ -48,7 +48,7 @@
       "createdAt": 1580603929,
       "updatedAt": 1582624602914,
       "priority": 1,
-      "userId": 2
+      "userId": 5937987
     },
     {
       "id": 6,
@@ -58,24 +58,33 @@
       "createdAt": 1580603929,
       "updatedAt": null,
       "priority": 3,
-      "userId": 3
+      "userId": 5937987
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": 9220314,
       "firstName": "John",
-      "lastName": "Doe"
+      "lastName": "Doe",
+      "avatarColor": "#9C27B0"
     },
     {
-      "id": 2,
+      "id": 8302314,
       "firstName": "Jane",
-      "lastName": "Citizen"
+      "lastName": "Citizen",
+      "avatarColor": "#607D8B"
     },
     {
-      "id": 3,
+      "id": 5937987,
       "firstName": "Richard",
-      "lastName": "Roe"
+      "lastName": "Roe",
+      "avatarColor": "#E91E63"
+    },
+    {
+      "id": 4935703,
+      "firstName": "Joe",
+      "lastName": "Schmoe",
+      "avatarColor": "#1976D2"
     }
   ]
 }

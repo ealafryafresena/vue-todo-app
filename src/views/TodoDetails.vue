@@ -21,7 +21,7 @@
                 <br />
                 <strong>Status: {{ todo.status }}</strong>
               </div>
-              <UserInitials :user="userName" :initials-style="initialsStyle" />
+              <UserInitials :user="userData" :initials-style="initialsStyle" />
             </div>
             <v-list-item-title
               class="headline mb-3"
@@ -72,8 +72,12 @@ export default {
   },
   computed: {
     ...mapGetters("todos", ["getTodoById"]),
-    userName() {
-      return { firstName: this.todo.firstName, lastName: this.todo.lastName };
+    userData() {
+      return {
+        firstName: this.todo.firstName,
+        lastName: this.todo.lastName,
+        avatarColor: this.todo.avatarColor
+      };
     }
   },
   created() {

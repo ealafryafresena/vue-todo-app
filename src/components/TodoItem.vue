@@ -11,11 +11,11 @@
             <i v-if="todo.updatedAt !== null">(U)</i>
           </div>
         </div>
-        <UserInitials :user="userName" :initials-style="initialsStyle" />
+        <UserInitials :user="userData" :initials-style="initialsStyle" />
       </div>
-      <v-list-item-title class="headline mb-1">
-        {{ todo.title }}
-      </v-list-item-title>
+      <v-list-item-title class="headline mb-1">{{
+        todo.title
+      }}</v-list-item-title>
       <v-list-item-subtitle>
         <span>{{ todo.description }}</span>
         <div
@@ -102,8 +102,12 @@ export default {
     moveToStatus() {
       return this.todo.status === "todo" ? "Progress" : "Done";
     },
-    userName() {
-      return { firstName: this.todo.firstName, lastName: this.todo.lastName };
+    userData() {
+      return {
+        firstName: this.todo.firstName,
+        lastName: this.todo.lastName,
+        avatarColor: this.todo.avatarColor
+      };
     }
   },
   methods: {

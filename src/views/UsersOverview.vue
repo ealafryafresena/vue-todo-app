@@ -17,7 +17,10 @@
           <v-card>
             <v-card-title class="headline">Create User</v-card-title>
             <v-card-text>
-              <UserCreate @closeDialog="closeDialog" />
+              <UserCreate
+                @closeDialog="closeDialog"
+                :avatarColors="avatarColors"
+              />
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -29,6 +32,7 @@
 <script>
 import UserTable from "@/components/UserTable.vue";
 import UserCreate from "@/components/UserCreate.vue";
+import ColorService from "@/services/ColorService";
 import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
@@ -63,6 +67,9 @@ export default {
         user.todosCount.statusDone = statusDone.length;
         return user;
       });
+    },
+    avatarColors() {
+      return ColorService;
     }
   },
   methods: {
