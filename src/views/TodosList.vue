@@ -48,19 +48,47 @@
         />
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog" max-width="640">
+      <v-card>
+        <v-card-title class="headline">Task Details</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <TodoDetail :todo="todo" />
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="mt-1 mr-3 mb-1"
+            color="blue"
+            outlined
+            text
+            @click="dialog = false"
+            >Close</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import TodoDetail from "@/components/TodoDetail.vue";
 import TodoItem from "@/components/TodoItem.vue";
 import UserInitials from "@/components/UserInitials.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "todos-list",
-  components: { TodoItem, UserInitials },
+  components: {
+    TodoItem,
+    UserInitials,
+    TodoDetail
+  },
   data() {
     return {
+      todo: {},
+      dialog: false,
       initialsStyle: {
         width: "36px",
         height: "36px",
@@ -75,6 +103,7 @@ export default {
   computed: {
     ...mapGetters("users", ["users"]),
     ...mapGetters("todos", ["todos"]),
+    ...mapGetters("todos", ["getTodoById"]),
     todosColumns() {
       return [
         { columnName: "Todo", columnData: this.openTodos },
@@ -116,7 +145,8 @@ export default {
     ]),
     ...mapActions("users", ["fetchUsers"]),
     showDetails(id) {
-      this.$router.push({ name: "todo-details", params: { id } });
+      this.todo = this.getTodoById(id);
+      this.dialog = true;
     },
     statusNext(id) {
       this.updateStatusNext(id);

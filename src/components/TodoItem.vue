@@ -1,14 +1,10 @@
 <template>
   <v-card class="mx-auto mb-2" max-width="500" outlined>
     <v-card-text>
-      <div class="overline mb-2 d-flex justify-space-between">
+      <div class="overline mb-1 d-flex justify-space-between align-end">
         <div>
           <div>
             <strong>Priority: {{ todo.priority | priority }}</strong>
-          </div>
-          <div>
-            Created: {{ todo.createdAt | moment("ddd, MMM Do YYYY") }}
-            <i v-if="todo.updatedAt !== null">(U)</i>
           </div>
         </div>
         <UserInitials :user="userData" :initials-style="initialsStyle" />
@@ -56,9 +52,9 @@ export default {
   data() {
     return {
       initialsStyle: {
-        width: "30px",
-        height: "30px",
-        fontSize: "14px"
+        width: "26px",
+        height: "26px",
+        fontSize: "12px"
       },
       buttons: [
         {
