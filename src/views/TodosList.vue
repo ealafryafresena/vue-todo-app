@@ -1,15 +1,6 @@
 <template>
   <v-container>
-    <div class="user-bar mt-3 d-flex justify-end">
-      <UserInitials
-        class="ml-2"
-        v-for="user in users"
-        :key="user.id"
-        :user="user"
-        :initials-style="initialsStyle"
-      />
-    </div>
-    <h1 class="display-1 mt-2 mb-8">Task Manager</h1>
+    <h1 class="display-1 mt-2 mb-8">Task Board</h1>
     <v-row>
       <v-col
         cols="12"
@@ -75,25 +66,18 @@
 <script>
 import TodoDetail from "@/components/TodoDetail.vue";
 import TodoItem from "@/components/TodoItem.vue";
-import UserInitials from "@/components/UserInitials.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "todos-list",
   components: {
     TodoItem,
-    UserInitials,
     TodoDetail
   },
   data() {
     return {
       todo: {},
-      dialog: false,
-      initialsStyle: {
-        width: "36px",
-        height: "36px",
-        fontSize: "16px"
-      }
+      dialog: false
     };
   },
   created() {

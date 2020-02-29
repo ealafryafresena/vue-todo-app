@@ -1,73 +1,32 @@
 <template>
   <v-app>
-    <v-app-bar app color="blue" dark>
-      <v-toolbar-title>
-        <router-link :to="{ name: 'todos-list' }">Task Manager</router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        v-for="link in links"
-        :key="`${link.label}-header-link`"
-        text
-        rounded
-        :to="link.url"
-        >{{ link.label }}</v-btn
-      >
-    </v-app-bar>
-
+    <NavBar :links="links" />
     <v-content>
       <router-view></router-view>
     </v-content>
-
-    <v-footer class="blue" color="white" padless>
-      <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="`${link.label}-footer-link`"
-          color="white"
-          text
-          rounded
-          class="my-2"
-          :to="link.url"
-          >{{ link.label }}</v-btn
-        >
-        <v-col class="blue lighten-1 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} —
-          <strong>Task Manager</strong>
-        </v-col>
-      </v-row>
-    </v-footer>
+    <FooterBar :links="links" />
   </v-app>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
+import FooterBar from "@/components/FooterBar.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: { NavBar, FooterBar },
   data: () => ({
     links: [
-      { label: "Task Board", url: "/" },
-      { label: "Create Task", url: "/todo/create" },
-      { label: "Users", url: "/users" },
-      { label: "About", url: "/about" }
+      { icon: "mdi-view-dashboard", label: "Task Board", url: "/" },
+      { icon: "mdi-view-list", label: "Create Task", url: "/todo/create" },
+      { icon: "mdi-account-group", label: "Users", url: "/users" },
+      { icon: "mdi-help-box", label: "About", url: "/about" }
     ]
   })
 };
 </script>
 
 <style lang="scss">
-.v-toolbar__title {
-  a {
-    color: white !important;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: rgba(255, 255, 255, 0.7) !important;
-  }
-}
-
 h1:after {
   display: block;
   clear: both;

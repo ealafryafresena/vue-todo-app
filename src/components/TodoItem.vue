@@ -9,9 +9,9 @@
         </div>
         <UserInitials :user="userData" :initials-style="initialsStyle" />
       </div>
-      <v-list-item-title class="headline mb-1">{{
-        todo.title
-      }}</v-list-item-title>
+      <v-list-item-title class="headline mb-1">
+        {{ todo.title }}
+      </v-list-item-title>
       <v-list-item-subtitle>
         <span>{{ todo.description }}</span>
         <div
