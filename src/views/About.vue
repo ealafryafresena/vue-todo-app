@@ -73,11 +73,11 @@ export default {
   width: 340px;
   padding: 20px 25px 25px;
   margin-bottom: 50px;
-  border: 1px solid #2196f3;
+  border: 1px solid #3f51b5;
   border-radius: 5px;
 
   h2 {
-    border-bottom: 2px solid #2196f3;
+    border-bottom: 2px solid #3f51b5;
   }
 
   ul {

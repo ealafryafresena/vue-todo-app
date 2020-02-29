@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
 h1:after {
   display: block;
   clear: both;
@@ -36,7 +40,10 @@ h1:after {
   bottom: 0;
   height: 4px;
   width: 70px;
-  border-bottom: 4px solid #2196f3;
+  border-bottom: 4px solid #3f51b5;
   padding: 4px 0px;
+}
+.theme--light.v-card > .v-card__text {
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 </style>

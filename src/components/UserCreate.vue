@@ -21,11 +21,11 @@
             * Required
           </div>
           <div>
-            <v-btn color="blue" outlined class="mr-4" @click="closeDialog"
+            <v-btn color="indigo" outlined class="mr-4" @click="closeDialog"
               >Cancel</v-btn
             >
             <v-btn
-              color="blue"
+              color="indigo"
               :disabled="!formValidty"
               @click="submitCreateUser"
               >Save</v-btn

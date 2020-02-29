@@ -27,7 +27,7 @@
           </v-card>
         </div>
         <TodoItem
-          class="mb-4"
+          class="mb-2"
           v-else
           v-for="todo in todosColumn.columnData"
           :key="todo.id"
@@ -51,7 +51,7 @@
           <v-spacer></v-spacer>
           <v-btn
             class="mt-1 mr-3 mb-1"
-            color="blue"
+            color="indigo"
             outlined
             text
             @click="dialog = false"

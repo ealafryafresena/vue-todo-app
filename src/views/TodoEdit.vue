@@ -47,18 +47,18 @@
               v-model="todo.status"
             ></v-select>
             <div class="todo-edit-actions">
-              <v-btn color="blue" outlined class="mr-4" @click="cancelEdit"
+              <v-btn color="indigo" outlined class="mr-4" @click="cancelEdit"
                 >Cancel</v-btn
               >
               <v-btn
-                color="blue"
+                color="indigo"
                 outlined
                 class="mr-4"
                 @click.stop="dialog = true"
                 >Delete Task</v-btn
               >
               <v-btn
-                color="blue"
+                color="indigo"
                 :disabled="!formValidty"
                 @click="submitEditTodo(todo.id)"
                 >Save</v-btn
@@ -77,11 +77,11 @@
         >
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="blue" outlined text @click="dialog = false"
+          <v-btn color="indigo" outlined text @click="dialog = false"
             >Cancel</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn color="blue" dark @click="submitDeleteTodo(todo.id)"
+          <v-btn color="indigo" dark @click="submitDeleteTodo(todo.id)"
             >Delete</v-btn
           >
         </v-card-actions>

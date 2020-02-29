@@ -1,6 +1,7 @@
 <template>
   <v-btn
-    outlined
+    dark
+    rounded
     :color="color"
     :buttonText="buttonText"
     text

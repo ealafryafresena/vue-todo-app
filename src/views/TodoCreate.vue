@@ -45,11 +45,15 @@
                 * Required
               </div>
               <div>
-                <v-btn color="blue" outlined class="mr-4" @click="cancelCreate"
+                <v-btn
+                  color="indigo"
+                  outlined
+                  class="mr-4"
+                  @click="cancelCreate"
                   >Cancel</v-btn
                 >
                 <v-btn
-                  color="blue"
+                  color="indigo"
                   :disabled="!formValidty"
                   @click="submitCreateTodo"
                   >Create Task</v-btn

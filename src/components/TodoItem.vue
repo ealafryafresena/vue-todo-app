@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mb-2" max-width="500" outlined>
+  <v-card color="grey lighten-3" class="mx-auto mb-2" max-width="500" outlined>
     <v-card-text>
       <div class="overline mb-1 d-flex justify-space-between align-end">
         <div>
@@ -58,29 +58,29 @@ export default {
       },
       buttons: [
         {
-          color: "blue",
-          width: "52",
+          color: "indigo",
+          width: "50",
           icon: "mdi-arrow-left",
           isStatus: this.todo.status !== "todo",
           event: this.updateStatusBack
         },
         {
-          color: "blue",
-          width: "52",
+          color: "indigo",
+          width: "50",
           icon: "mdi-information-outline",
           isStatus: true,
           event: this.showDetails
         },
         {
-          color: "blue",
-          width: "52",
+          color: "indigo",
+          width: "50",
           icon: "mdi-pencil",
           isStatus: this.todo.status !== "done",
           event: this.editTodo
         },
         {
-          color: "blue",
-          width: "52",
+          color: "indigo",
+          width: "50",
           icon: "mdi-arrow-right",
           isStatus: this.todo.status !== "done",
           event: this.updateStatusNext
@@ -129,9 +129,12 @@ export default {
 
 <style lang="scss" scoped>
 .v-card__text {
-  padding: 10px 16px 16px 16px;
+  padding: 8px 12px 12px 12px;
 }
 .placeholder {
   height: 22px;
+}
+.theme--light.v-card.v-card--outlined {
+  border: 4px solid rgb(63, 81, 181, 0.3) !important;
 }
 </style>

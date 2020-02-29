@@ -4,7 +4,7 @@
       <v-col cols="12" md="8" sm="12">
         <div class="user-create mb-8 d-flex justify-space-between align-center">
           <h1 class="display-1">Users</h1>
-          <v-btn color="blue" class="mr-4" @click.stop="dialog = true"
+          <v-btn color="indigo" class="mr-4" @click.stop="dialog = true"
             >Create User</v-btn
           >
         </div>

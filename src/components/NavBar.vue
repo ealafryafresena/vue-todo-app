@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-app-bar app flat color="grey lighten-3" height="60">
+    <v-app-bar app flat color="grey darken-2" dark height="60">
       <v-app-bar-nav-icon
         v-if="!drawer"
         @click.stop="toggleDrawer"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title v-if="!drawer">
+      <v-toolbar-title color="grey darken-2" v-if="!drawer">
         <router-link :to="{ name: 'todos-list' }">Task Manager</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -20,7 +20,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer color="grey darken-3" dark app v-model="drawer">
+    <v-navigation-drawer color="white" app v-model="drawer">
       <v-list-item>
         <v-list-item-content>
           <div class="d-flex justify-space-between">
@@ -38,6 +38,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item
+              color="indigo"
               v-for="link in links"
               :key="`${link.label}-header-link`"
               text
@@ -89,13 +90,13 @@ export default {
 <style lang="scss" scoped>
 .v-toolbar__title {
   a {
-    color: rgba(0, 0, 0, 0.87) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     font-weight: 600;
     text-decoration: none;
   }
 
   a:hover {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
   }
 }
 </style>
