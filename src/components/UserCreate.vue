@@ -5,6 +5,7 @@
         <v-text-field
           label="Firstname *"
           v-model="user.firstName"
+          :counter="20"
           outlined
           :rules="firstNameRules"
           required
@@ -12,6 +13,7 @@
         <v-text-field
           label="Lastname *"
           v-model="user.lastName"
+          :counter="20"
           outlined
           :rules="lastNameRules"
           required
@@ -47,14 +49,14 @@ export default {
       firstNameRules: [
         value => !!value || "Firstname is required",
         value =>
-          (value && value.length <= 15) ||
-          "Firstname must be less than 15 characters"
+          (value && value.length <= 20) ||
+          "Firstname must be less than 21 characters"
       ],
       lastNameRules: [
         value => !!value || "Lastname is required",
         value =>
-          (value && value.length <= 15) ||
-          "Lastname must be less than 15 characters"
+          (value && value.length <= 20) ||
+          "Lastname must be less than 21 characters"
       ],
       formValidty: false
     };

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="mt-6" justify="center">
-      <v-col cols="12" md="8" sm="12">
+      <v-col cols="12">
         <div class="user-create mb-8 d-flex justify-space-between align-center">
           <h1 class="display-1">Users</h1>
           <v-btn color="indigo" class="mr-4" @click.stop="dialog = true"
@@ -15,7 +15,7 @@
       <v-col cols="12" md="6" sm="8">
         <v-dialog v-model="dialog" max-width="440">
           <v-card>
-            <v-card-title class="headline">Create User</v-card-title>
+            <v-card-title class="headline">Create a new User</v-card-title>
             <v-card-text>
               <UserCreate
                 @closeDialog="closeDialog"
