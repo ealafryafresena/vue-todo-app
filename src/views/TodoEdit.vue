@@ -10,7 +10,7 @@
               v-model="todo.title"
               outlined
               :rules="titleRules"
-              :counter="100"
+              :counter="50"
               clearable
               required
             ></v-text-field>
@@ -106,8 +106,8 @@ export default {
       titleRules: [
         value => !!value || "Title is required",
         value =>
-          (value && value.length <= 100) ||
-          "Title must be less than 101 characters"
+          (value && value.length <= 50) ||
+          "Title must be less than 51 characters"
       ],
       descriptionRules: [
         value =>

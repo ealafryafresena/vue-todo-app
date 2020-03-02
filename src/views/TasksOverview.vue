@@ -11,16 +11,31 @@
         <TaskTable :todos="todosTableData" />
       </v-col>
     </v-row>
+    <v-dialog v-model="dialog" max-width="640">
+      <v-card>
+        <v-card-title class="headline">Create a new Task</v-card-title>
+        <v-card-text>
+          <TodoCreate @closeDialog="closeDialog" />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import TaskTable from "@/components/TaskTable.vue";
+import TodoCreate from "@/components/TodoCreate.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    TaskTable
+    TaskTable,
+    TodoCreate
+  },
+  data() {
+    return {
+      dialog: false
+    };
   },
   created() {
     this.fetchUsers();
@@ -42,7 +57,10 @@ export default {
   },
   methods: {
     ...mapActions("todos", ["fetchTodos"]),
-    ...mapActions("users", ["fetchUsers"])
+    ...mapActions("users", ["fetchUsers"]),
+    closeDialog() {
+      this.dialog = false;
+    }
   }
 };
 </script>

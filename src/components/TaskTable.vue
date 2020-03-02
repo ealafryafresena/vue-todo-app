@@ -6,7 +6,7 @@
           <th
             v-for="columnHeader in columnHeaders"
             :key="columnHeader.text"
-            class="table-header text-left"
+            :class="columnHeader.textAlign"
           >
             {{ columnHeader.text }}
           </th>
@@ -17,14 +17,14 @@
           <td>{{ todo.title }}</td>
           <td>{{ todo.status | capitalizeFirstChar }}</td>
           <td>{{ todo.priority | priority }}</td>
-          <td>{{ todo.createdAt | moment("MM/DD/YYYY") }}</td>
-          <td>
-            <span v-if="todo.updatedAt !== null">
-              {{ todo.updatedAt | moment("MM/DD/YYYY") }}
-            </span>
-            <span v-else class="d-flex justify-center align-center"
-              >&mdash;</span
-            >
+          <td class="text-center">
+            {{ todo.createdAt | moment("MM/DD/YYYY") }}
+          </td>
+          <td class="text-center">
+            <span v-if="todo.updatedAt !== null">{{
+              todo.updatedAt | moment("MM/DD/YYYY")
+            }}</span>
+            <span v-else>&mdash;</span>
           </td>
           <td class="d-flex justify-center align-center">
             <UserInitials
@@ -54,14 +54,14 @@ export default {
   data() {
     return {
       fixedHeader: true,
-      height: 450,
+      height: 420,
       columnHeaders: [
-        { text: "Title" },
-        { text: "Status" },
-        { text: "Priority" },
-        { text: "Task Created" },
-        { text: "Task Last Updated" },
-        { text: "Assigned User" }
+        { text: "Title", textAlign: "text-left" },
+        { text: "Status", textAlign: "text-left" },
+        { text: "Priority", textAlign: "text-left" },
+        { text: "Task Created", textAlign: "text-center" },
+        { text: "Task Last Updated", textAlign: "text-center" },
+        { text: "Assigned User", textAlign: "text-center" }
       ],
       initialsStyle: {
         width: "26px",
@@ -77,9 +77,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.table-header {
-  min-width: 140px;
-}
-</style>
