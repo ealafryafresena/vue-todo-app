@@ -18,7 +18,7 @@ export default {
   data: () => ({
     links: [
       { icon: "mdi-view-dashboard", label: "Task Board", url: "/" },
-      { icon: "mdi-view-list", label: "Create Task", url: "/todo/create" },
+      { icon: "mdi-view-list", label: "Tasks", url: "/tasks" },
       { icon: "mdi-account-group", label: "Users", url: "/users" },
       { icon: "mdi-help-box", label: "About", url: "/about" }
     ]

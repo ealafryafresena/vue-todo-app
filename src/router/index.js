@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import TodosList from "../views/TodosList.vue";
-import TodoCreate from "../views/TodoCreate.vue";
 import TodoEdit from "../views/TodoEdit.vue";
 import UsersOverview from "../views/UsersOverview.vue";
+import TasksOverview from "../views/TasksOverview.vue";
 import About from "@/views/About.vue";
 import NotFound from "@/views/NotFound.vue";
 
@@ -16,11 +16,6 @@ const routes = [
     component: TodosList
   },
   {
-    path: "/todo/create",
-    name: "todo-create",
-    component: TodoCreate
-  },
-  {
     path: "/todo-edit/:id",
     name: "todo-edit",
     component: TodoEdit,
@@ -30,6 +25,11 @@ const routes = [
     path: "/users",
     name: "users-overview",
     component: UsersOverview
+  },
+  {
+    path: "/tasks",
+    name: "tasks-overview",
+    component: TasksOverview
   },
   {
     path: "/about",
