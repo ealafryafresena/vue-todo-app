@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="display-1 mt-2 mb-8">Task Board</h1>
+    <h1 class="display-1 mt-9 mb-8">Task Board</h1>
     <v-row>
       <v-col
         cols="12"
