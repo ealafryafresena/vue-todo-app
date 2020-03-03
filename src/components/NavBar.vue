@@ -64,7 +64,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   components: { UserInitials },
   data: () => ({
-    drawer: false,
+    drawer: window.innerWidth > 1263 ? true : false,
     initialsStyle: {
       width: "30px",
       height: "30px",
