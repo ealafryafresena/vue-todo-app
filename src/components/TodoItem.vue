@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey lighten-3" class="mx-auto mb-2" max-width="500" outlined>
+  <v-card color="grey lighten-5" class="mx-auto mb-2" max-width="500" outlined>
     <v-card-text>
       <div class="overline mb-1 d-flex justify-space-between align-end">
         <div>
@@ -135,6 +135,6 @@ export default {
   height: 22px;
 }
 .theme--light.v-card.v-card--outlined {
-  border: 4px solid rgb(63, 81, 181, 0.3) !important;
+  border: 4px solid #efefef !important;
 }
 </style>
