@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-app-bar app flat color="grey darken-2" dark height="60">
+    <v-app-bar app flat color="grey darken-2" dark height="52">
       <v-app-bar-nav-icon
         v-if="!drawer"
         @click.stop="toggleDrawer"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title color="grey darken-2" v-if="!drawer">
+      <v-toolbar-title color="grey darken-2">
         <router-link :to="{ name: 'todos-list' }">Task Manager</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -21,20 +21,17 @@
     </v-app-bar>
 
     <v-navigation-drawer color="white" app v-model="drawer">
-      <v-list-item>
+      <v-list-item dense class="side-menu-header">
         <v-list-item-content>
           <div class="d-flex justify-space-between">
-            <v-list-item-title class="title">Task Manager</v-list-item-title>
-            <v-app-bar-nav-icon @click.stop="toggleDrawer">
+            <v-app-bar-nav-icon dark @click.stop="toggleDrawer">
               <v-icon>mdi-close</v-icon>
             </v-app-bar-nav-icon>
           </div>
-          <v-list-item-subtitle
-            >Yeah, another task manager</v-list-item-subtitle
-          >
         </v-list-item-content>
       </v-list-item>
       <v-list dense>
+        <v-list-item>Yeah, another task manager</v-list-item>
         <v-list-item>
           <v-list-item-content>
             <v-list-item
@@ -98,5 +95,8 @@ export default {
   a:hover {
     color: rgba(255, 255, 255, 0.6) !important;
   }
+}
+.side-menu-header {
+  background-color: #616161;
 }
 </style>
