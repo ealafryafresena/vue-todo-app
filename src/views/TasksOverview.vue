@@ -4,19 +4,43 @@
       <v-col cols="12">
         <div class="todo-create mb-8 d-flex justify-space-between align-center">
           <h1 class="display-1">Tasks</h1>
-          <v-btn color="indigo" class="mr-4" @click.stop="dialog = true"
+          <v-btn color="indigo" class="mr-4" @click.stop="createDialog = true"
             >Create Task</v-btn
           >
         </div>
-        <TaskTable :todos="todosTableData" />
+        <TaskTable
+          :todos="todosTableData"
+          @openDeleteDialog="openDeleteDialog"
+          @deleteTodo="emittedTodoData"
+        />
       </v-col>
     </v-row>
-    <v-dialog v-model="dialog" max-width="640">
+    <v-dialog v-model="createDialog" max-width="640">
       <v-card>
         <v-card-title class="headline">Create a new Task</v-card-title>
         <v-card-text>
           <TodoCreate @closeDialog="closeDialog" />
         </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="deleteDialog" max-width="440">
+      <v-card>
+        <v-card-title class="headline">Delete Task</v-card-title>
+
+        <v-card-text>
+          Do you really want to delete the task
+          <strong>
+            <i>{{ todoTitle }}</i> </strong
+          >?
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn color="indigo" outlined text @click="deleteDialog = false"
+            >Cancel</v-btn
+          >
+          <v-spacer></v-spacer>
+          <v-btn color="indigo" dark @click="submitDeleteTodo">Delete</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>
@@ -34,7 +58,10 @@ export default {
   },
   data() {
     return {
-      dialog: false
+      createDialog: false,
+      deleteDialog: false,
+      todoId: null,
+      todoTitle: ""
     };
   },
   created() {
@@ -56,10 +83,21 @@ export default {
     }
   },
   methods: {
-    ...mapActions("todos", ["fetchTodos"]),
+    ...mapActions("todos", ["deleteTodo", "fetchTodos"]),
     ...mapActions("users", ["fetchUsers"]),
     closeDialog() {
-      this.dialog = false;
+      this.createDialog = false;
+    },
+    openDeleteDialog() {
+      this.deleteDialog = true;
+    },
+    emittedTodoData(id, title) {
+      this.todoId = id;
+      this.todoTitle = title;
+    },
+    submitDeleteTodo() {
+      this.deleteTodo(this.todoId);
+      this.deleteDialog = false;
     }
   }
 };

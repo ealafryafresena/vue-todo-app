@@ -21,12 +21,12 @@
             {{ todo.createdAt | moment("MM/DD/YYYY") }}
           </td>
           <td class="text-center">
-            <span v-if="todo.updatedAt !== null">{{
-              todo.updatedAt | moment("MM/DD/YYYY")
-            }}</span>
+            <span v-if="todo.updatedAt !== null">
+              {{ todo.updatedAt | moment("MM/DD/YYYY") }}
+            </span>
             <span v-else>&mdash;</span>
           </td>
-          <td class="d-flex justify-center align-center">
+          <td>
             <UserInitials
               :user="{
                 firstName: todo.firstName,
@@ -35,6 +35,11 @@
               }"
               :initials-style="initialsStyle"
             />
+          </td>
+          <td>
+            <v-icon medium @click="deleteTodo(todo.id, todo.title)"
+              >mdi-delete</v-icon
+            >
           </td>
         </tr>
       </tbody>
@@ -54,14 +59,15 @@ export default {
   data() {
     return {
       fixedHeader: true,
-      height: 420,
+      height: 450,
       columnHeaders: [
         { text: "Title", textAlign: "text-left" },
         { text: "Status", textAlign: "text-left" },
         { text: "Priority", textAlign: "text-left" },
-        { text: "Task Created", textAlign: "text-center" },
-        { text: "Task Last Updated", textAlign: "text-center" },
-        { text: "Assigned User", textAlign: "text-center" }
+        { text: "Task Created", textAlign: "text-center" },
+        { text: "Task Last Updated", textAlign: "text-center" },
+        { text: "Assigned User", textAlign: "text-left" },
+        { text: "Delete Task", textAlign: "text-left" }
       ],
       initialsStyle: {
         width: "26px",
@@ -74,6 +80,12 @@ export default {
   filters: {
     priority,
     capitalizeFirstChar
+  },
+  methods: {
+    deleteTodo(id, title) {
+      this.$emit("openDeleteDialog");
+      this.$emit("deleteTodo", id, title);
+    }
   }
 };
 </script>
